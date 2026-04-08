@@ -1422,15 +1422,32 @@
     });
 
     // Mobile Dropdown Toggle
-    const dropdowns = document.querySelectorAll('.dropdown');
-    dropdowns.forEach(dropdown => {
-        dropdown.addEventListener('click', function(e) {
-            if (window.innerWidth <= 968) {
-                e.preventDefault();
-                this.classList.toggle('active');
-            }
-        });
+const dropdowns = document.querySelectorAll('.dropdown');
+dropdowns.forEach(dropdown => {
+    const dropdownToggle = dropdown.querySelector('.dropdown-toggle');
+    
+    dropdownToggle.addEventListener('click', function(e) {
+        if (window.innerWidth <= 968) {
+            e.preventDefault();
+            e.stopPropagation();
+            dropdown.classList.toggle('active');
+        }
     });
+});
+
+// Mobile - Allow dropdown items to be clicked
+document.querySelectorAll('.dropdown-item a').forEach(link => {
+    link.addEventListener('click', function(e) {
+        // Don't prevent default - allow navigation
+        // Just close the mobile menu
+        if (window.innerWidth <= 968) {
+            const mobileToggle = document.querySelector('.mobile-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            mobileToggle.classList.remove('active');
+            navMenu.classList.remove('active');
+        }
+    });
+});
 
     // Close mobile menu when clicking on a link
     const navLinks = document.querySelectorAll('.nav-link');
