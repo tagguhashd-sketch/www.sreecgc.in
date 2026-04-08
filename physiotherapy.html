@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Physiotherapy - Sree Child Guidance Centre</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #FF6B9D;
+            --secondary-color: #4ECDC4;
+            --accent-color: #FFE66D;
+            --text-dark: #2C3E50;
+            --text-light: #7F8C8D;
+            --bg-light: #FFF8F3;
+            --white: #FFFFFF;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-logo img {
+            height: 50px;
+            width: auto;
+        }
+
+        .back-btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 107, 157, 0.4);
+        }
+
+        .hero-service {
+            background: linear-gradient(135deg, rgba(255, 107, 157, 0.9), rgba(78, 205, 196, 0.9)),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23FFE66D" width="1200" height="600"/><circle fill="%23FF6B9D" opacity="0.1" cx="200" cy="150" r="180"/><circle fill="%234ECDC4" opacity="0.1" cx="900" cy="400" r="200"/></svg>');
+            background-size: cover;
+            padding: 140px 20px 80px;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-service .icon {
+            font-size: 6rem;
+            margin-bottom: 1rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .hero-service h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .hero-service p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+        }
+
+        .content-section {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 5rem 20px;
+        }
+
+        .content-section h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .content-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            border-radius: 2px;
+        }
+
+        .content-section h3 {
+            font-size: 1.8rem;
+            color: var(--secondary-color);
+            margin: 2.5rem 0 1rem;
+        }
+
+        .content-section p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, rgba(255, 107, 157, 0.05), rgba(78, 205, 196, 0.05));
+            border-left: 4px solid var(--primary-color);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+        }
+
+        .info-box p {
+            margin-bottom: 0;
+            color: var(--text-dark);
+        }
+
+        .symptoms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .symptom-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .symptom-card:hover {
+            transform: translateX(10px);
+            box-shadow: 0 8px 30px rgba(255, 107, 157, 0.2);
+            border-left-color: var(--primary-color);
+        }
+
+        .symptom-card .icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .symptom-card h4 {
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .symptom-card p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            margin: 0;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .benefit-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .benefit-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 107, 157, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .benefit-card:hover::before {
+            left: 100%;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 20px 50px rgba(255, 107, 157, 0.3);
+        }
+
+        .benefit-card .icon {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            display: block;
+            transition: all 0.4s ease;
+        }
+
+        .benefit-card:hover .icon {
+            transform: scale(1.2) rotateY(360deg);
+        }
+
+        .benefit-card h3 {
+            font-size: 1.4rem;
+            color: var(--primary-color);
+            margin-bottom: 0.8rem;
+        }
+
+        .benefit-card p {
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        .process-timeline {
+            margin: 3rem 0;
+            position: relative;
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 30px;
+            top: 60px;
+            bottom: -30px;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+        }
+
+        .timeline-item:last-child::before {
+            display: none;
+        }
+
+        .timeline-number {
+            min-width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            box-shadow: 0 5px 15px rgba(255, 107, 157, 0.4);
+            position: relative;
+            z-index: 1;
+        }
+
+        .timeline-content {
+            flex: 1;
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 30px rgba(255, 107, 157, 0.2);
+        }
+
+        .timeline-content h4 {
+            font-size: 1.4rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content p {
+            margin: 0;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 5rem 20px;
+            text-align: center;
+            color: white;
+            margin-top: 4rem;
+        }
+
+        .cta-section h2 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.95;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1.2rem 3rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn-whatsapp {
+            background: #25D366;
+            color: white;
+            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);
+        }
+
+        .btn-whatsapp:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 12px 35px rgba(37, 211, 102, 0.6);
+        }
+
+        .btn-call {
+            background: white;
+            color: var(--primary-color);
+            box-shadow: 0 5px 20px rgba(255, 255, 255, 0.4);
+        }
+
+        .btn-call:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 12px 35px rgba(255, 255, 255, 0.6);
+        }
+
+        footer {
+            background: var(--text-dark);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        footer p {
+            opacity: 0.8;
+        }
+
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 70px;
+            height: 70px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: white;
+            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            animation: float 3s ease-in-out infinite;
+            text-decoration: none;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.2) rotate(10deg);
+            box-shadow: 0 10px 40px rgba(37, 211, 102, 0.8);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @media (max-width: 768px) {
+            .hero-service h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero-service .icon {
+                font-size: 4rem;
+            }
+
+            .content-section h2 {
+                font-size: 2rem;
+            }
+
+            .benefits-grid,
+            .symptoms-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline-item {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .timeline-item::before {
+                display: none;
+            }
+
+            .cta-section h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="https://i.postimg.cc/zBjgFFby/Screenshot-2026-04-04-224646-removebg-preview.png" alt="SCGC Logo">
+                <span>SCGC</span>
+            </a>
+            <a href="index.html#services" class="back-btn">
+                ← Back to Home
+            </a>
+        </div>
+    </nav>
+
+    <section class="hero-service">
+        <div class="icon">🦵</div>
+        <h1>Physiotherapy</h1>
+        <p>Strengthening Movement, Enhancing Mobility</p>
+    </section>
+
+    <section class="content-section">
+        <h2>What is Pediatric Physiotherapy?</h2>
+        <p>Pediatric physiotherapy is a specialized branch of physical therapy that focuses on helping children improve their movement, strength, balance, and overall physical function. Our licensed pediatric physiotherapists work with children who have developmental delays, neurological conditions, or physical impairments to maximize their mobility and independence.</p>
+
+        <div class="info-box">
+            <p><strong>💡 The Power of Movement:</strong> Physical activity isn't just about exercise—it's crucial for brain development, learning, social interaction, and building confidence. Early physiotherapy intervention can significantly impact a child's long-term development and quality of life.</p>
+        </div>
+
+        <p>We use evidence-based therapeutic exercises, specialized equipment, and play-based activities to help children achieve their physical milestones, reduce pain, improve posture, and develop the strength and coordination needed for daily activities.</p>
+
+        <h3>Signs Your Child May Need Physiotherapy</h3>
+        
+        <div class="symptoms-grid">
+            <div class="symptom-card">
+                <div class="icon">👶</div>
+                <h4>Delayed Motor Milestones</h4>
+                <p>Late to roll, sit, crawl, stand, or walk compared to typical development</p>
+            </div>
+
+            <div class="symptom-card">
+                <div class="icon">⚖️</div>
+                <h4>Balance & Coordination Issues</h4>
+                <p>Frequent falls, clumsiness, or difficulty with stairs and uneven surfaces</p>
+            </div>
+
+            <div class="symptom-card">
+                <div class="icon">🦴</div>
+                <h4>Muscle Weakness</h4>
+                <p>Poor muscle tone, difficulty supporting weight, or tires easily</p>
+            </div>
+
+            <div class="symptom-card">
+                <div class="icon">🚶</div>
+                <h4>Abnormal Gait Pattern</h4>
+                <p>Walking on tiptoes, limping, or unusual walking patterns</p>
+            </div>
+
+            <div class="symptom-card">
+                <div class="icon">😣</div>
+                <h4>Pain or Stiffness</h4>
+                <p>Complaints of muscle or joint pain, limited range of motion</p>
+            </div>
+
+            <div class="symptom-card">
+                <div class="icon">📐</div>
+                <h4>Postural Problems</h4>
+                <p>Poor posture when sitting or standing, slouching, or asymmetry</p>
+            </div>
+
+            <div class="symptom-card">
+                <div class="icon">🏃</div>
+                <h4>Difficulty with Sports/Play</h4>
+                <p>Struggles with running, jumping, catching, or physical activities</p>
+            </div>
+
+            <div class="symptom-card">
+                <div class="icon">🧘</div>
+                <h4>Poor Endurance</h4>
+                <p>Tires quickly during physical activities or avoids active play</p>
+            </div>
+        </div>
+
+        <h3>How Our Physiotherapy Helps</h3>
+        
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <div class="icon">💪</div>
+                <h3>Strength Building</h3>
+                <p>Develop muscle strength and endurance through targeted exercises and activities</p>
+            </div>
+
+            <div class="benefit-card">
+                <div class="icon">🎯</div>
+                <h3>Balance & Coordination</h3>
+                <p>Improve stability, coordination, and body awareness for safer movement</p>
+            </div>
+
+            <div class="benefit-card">
+                <div class="icon">🤸</div>
+                <h3>Gross Motor Skills</h3>
+                <p>Master age-appropriate physical milestones like walking, running, and jumping</p>
+            </div>
+
+            <div class="benefit-card">
+                <div class="icon">🧘</div>
+                <h3>Flexibility & Range</h3>
+                <p>Increase joint flexibility and range of motion through stretching and mobilization</p>
+            </div>
+
+            <div class="benefit-card">
+                <div class="icon">🏥</div>
+                <h3>Pain Management</h3>
+                <p>Reduce pain and discomfort through therapeutic techniques and exercises</p>
+            </div>
+
+            <div class="benefit-card">
+                <div class="icon">🎓</div>
+                <h3>Functional Independence</h3>
+                <p>Enable participation in daily activities, school, and recreational pursuits</p>
+            </div>
+        </div>
+
+        <h3>Our Therapy Approach</h3>
+        
+        <div class="process-timeline">
+            <div class="timeline-item">
+                <div class="timeline-number">1</div>
+                <div class="timeline-content">
+                    <h4>Comprehensive Physical Assessment</h4>
+                    <p>Detailed evaluation of strength, flexibility, balance, posture, gait, and functional abilities</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-number">2</div>
+                <div class="timeline-content">
+                    <h4>Customized Treatment Plan</h4>
+                    <p>Development of individualized goals and therapy strategies based on assessment findings</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-number">3</div>
+                <div class="timeline-content">
+                    <h4>Therapeutic Exercises</h4>
+                    <p>Fun, play-based activities designed to strengthen muscles and improve movement patterns</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-number">4</div>
+                <div class="timeline-content">
+                    <h4>Specialized Techniques</h4>
+                    <p>Use of manual therapy, stretching, balance training, and neurodevelopmental techniques</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-number">5</div>
+                <div class="timeline-content">
+                    <h4>Home Exercise Program</h4>
+                    <p>Parent education and home activities to reinforce therapy gains and accelerate progress</p>
+                </div>
+            </div>
+        </div>
+
+        <h3>Conditions We Treat</h3>
+        <p>Our pediatric physiotherapy program effectively addresses:</p>
+        <ul style="list-style: none; padding: 0; margin: 2rem 0;">
+            <li style="padding: 0.8rem 0; border-bottom: 1px solid #eee;">✓ Cerebral Palsy</li>
+            <li style="padding: 0.8rem 0; border-bottom: 1px solid #eee;">✓ Developmental Coordination Disorder (DCD)</li>
+            <li style="padding: 0.8rem 0; border-bottom: 1px solid #eee;">✓ Muscular Dystrophy</li>
+            <li style="padding: 0.8rem 0; border-bottom: 1px solid #eee;">✓ Down Syndrome</li>
+            <li style="padding: 0.8rem 0; border-bottom: 1px solid #eee;">✓ Spina Bifida</li>
+            <li style="padding: 0.8rem 0; border-bottom: 1px solid #eee;">✓ Torticollis (Twisted Neck)</li>
+            <li style="padding: 0.8rem 0; border-bottom: 1px solid #eee;">✓ Toe Walking</li>
+            <li style="padding: 0.8rem 0; border-bottom: 1px solid #eee;">✓ Sports Injuries</li>
+            <li style="padding: 0.8rem 0; border-bottom: 1px solid #eee;">✓ Post-Surgical Rehabilitation</li>
+            <li style="padding: 0.8rem 0; border-bottom: 1px solid #eee;">✓ Developmental Delays</li>
+            <li style="padding: 0.8rem 0;">✓ Neurological Conditions</li>
+        </ul>
+
+        <div class="info-box">
+            <p><strong>🏋️ Our Facility:</strong> We have a fully equipped pediatric physiotherapy gym with mats, exercise balls, balance equipment, climbing structures, and specialized apparatus designed to make therapy engaging and effective for children of all ages and abilities!</p>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <h2>Get Your Child Moving with Confidence</h2>
+        <p>Book a physiotherapy assessment with our expert team</p>
+        <div class="cta-buttons">
+            <a href="https://wa.link/1nt8d1" class="btn btn-whatsapp" target="_blank">
+                💬 Book on WhatsApp
+            </a>
+            <a href="tel:+917680963882" class="btn btn-call">
+                📞 Call Now: +91 7680963882
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Sree Child Guidance Centre. All rights reserved.</p>
+    </footer>
+
+    <a href="https://wa.link/1nt8d1" class="whatsapp-float" target="_blank">💬</a>
+
+</body>
+</html>
