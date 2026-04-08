@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sree Child Guidance Center - Speech & Occupational Therapy for Children</title>
+    <title>Sree Child Guidance Centre - Speech & Occupational Therapy for Children</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -19,7 +19,7 @@
             --secondary-color: #4ECDC4;
             --accent-color: #FFE66D;
             --text-dark: #2C3E50;
-            --text-light: #7F8C8D;
+            --text-grey: #7F8C8D;
             --bg-light: #FFF8F3;
             --white: #FFFFFF;
             --shadow: 0 10px 30px rgba(0,0,0,0.1);
@@ -33,9 +33,192 @@
             overflow-x: hidden;
         }
 
-        /* Smooth Scroll */
         html {
             scroll-behavior: smooth;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            box-shadow: 0 5px 30px rgba(0,0,0,0.15);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-logo img {
+            height: 50px;
+            width: auto;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            padding: 0.5rem 0;
+            display: block;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Dropdown Menu */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-toggle {
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    position: relative;
+}
+
+.dropdown-toggle::before {
+    content: '▼';
+    font-size: 0.65rem;
+    transition: transform 0.3s ease;
+    display: inline-block;
+}
+
+        .dropdown:hover .dropdown-toggle::before {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            min-width: 300px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            border-radius: 10px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin-top: 1rem;
+            overflow: hidden;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            padding: 1rem 1.5rem;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: linear-gradient(135deg, rgba(255, 107, 157, 0.1), rgba(78, 205, 196, 0.1));
+            padding-left: 2rem;
+        }
+
+        .dropdown-item a {
+            text-decoration: none;
+            color: var(--text-dark);
+            display: block;
+            font-weight: 500;
+        }
+
+        .dropdown-item:hover a {
+            color: var(--primary-color);
+        }
+
+        /* Mobile Menu Toggle */
+        .mobile-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .mobile-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--primary-color);
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(7px, 7px);
+        }
+
+        .mobile-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
         }
 
         /* Hero Section */
@@ -50,9 +233,10 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            color: var(--white);
+            color: var(--grey);
             position: relative;
             padding: 20px;
+            margin-top: 80px;
         }
 
         .hero-content {
@@ -78,21 +262,23 @@
             filter: drop-shadow(0 8px 25px rgba(0, 0, 0, 0.4));
         }
 
-        .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-            animation: fadeInDown 1.2s ease;
-        }
+       .hero h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.8);
+    animation: fadeInDown 1.2s ease;
+    color: #2C3E50;
+}
 
-        .hero .tagline {
-            font-size: 1.5rem;
-            font-weight: 300;
-            margin-bottom: 2.5rem;
-            opacity: 0.95;
-            animation: fadeInUp 1.4s ease;
-        }
+.hero .tagline {
+    font-size: 1.5rem;
+    font-weight: 300;
+    margin-bottom: 2.5rem;
+    opacity: 0.95;
+    animation: fadeInUp 1.4s ease;
+    color: #34495E;
+}
 
         .hero-buttons {
             display: flex;
@@ -167,6 +353,7 @@
             justify-content: center;
             gap: 0.5rem;
             animation: fadeInUp 1.8s ease;
+            color: var(--white);
         }
 
         /* Container */
@@ -207,7 +394,7 @@
             border-radius: 2px;
         }
 
-        /* Services Section - Enhanced Floating Effect */
+        /* Services Section */
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -224,6 +411,9 @@
             cursor: pointer;
             position: relative;
             overflow: hidden;
+            text-decoration: none;
+            color: inherit;
+            display: block;
         }
 
         .service-card::before {
@@ -280,7 +470,7 @@
             color: var(--text-dark);
         }
 
-        /* Why Choose Us - Enhanced */
+        /* Why Choose Us */
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -348,7 +538,7 @@
             z-index: 1;
         }
 
-        /* Reviews Section - Enhanced */
+        /* Reviews Section */
         .reviews-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -458,7 +648,7 @@
             transform: scale(1.1);
         }
 
-        /* Locations - Enhanced */
+        /* Locations */
         .locations-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -803,6 +993,49 @@
         }
 
         /* Responsive Design */
+       @media (max-width: 968px) {
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 80px;
+        flex-direction: column;
+        background: white;
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+        box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+        padding: 2rem 0;
+        gap: 0;
+    }
+
+    .nav-menu.active {
+        left: 0;
+    }
+
+    .nav-item {
+        width: 100%;
+        padding: 1rem 0;
+    }
+
+            .dropdown-menu {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+                box-shadow: none;
+                margin-top: 0.5rem;
+                display: none;
+            }
+
+            .dropdown.active .dropdown-menu {
+                display: block;
+            }
+
+            .mobile-toggle {
+                display: flex;
+            }
+        }
+
         @media (max-width: 768px) {
             .hero h1 {
                 font-size: 2.2rem;
@@ -861,14 +1094,71 @@
 </head>
 <body>
 
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#home" class="nav-logo">
+                <img src="https://i.postimg.cc/zBjgFFby/Screenshot-2026-04-04-224646-removebg-preview.png" alt="Sree Child Guidance Centre Logo">
+                <span>SREE CGC</span>
+            </a>
+            
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#home" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle">Services</a>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-item">
+                            <a href="speech-therapy.html">Speech Therapy</a>
+                        </div>
+                        <div class="dropdown-item">
+                            <a href="occupational-therapy.html">Occupational Therapy</a>
+                        </div>
+                        <div class="dropdown-item">
+                            <a href="behavioral-therapy.html">Behavioral Therapy</a>
+                        </div>
+                        <div class="dropdown-item">
+                            <a href="physiotherapy.html">Physiotherapy</a>
+                        </div>
+                        <div class="dropdown-item">
+                            <a href="hearing-solutions.html">Hearing Solutions</a>
+                        </div>
+                        <div class="dropdown-item">
+                            <a href="play-school.html">Play School for Special Kids</a>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="#about" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#reviews" class="nav-link">Reviews</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#locations" class="nav-link">Locations</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#contact" class="nav-link">Contact</a>
+                </li>
+            </ul>
+
+            <div class="mobile-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero" id="home">
         <div class="hero-content">
             <div class="hero-logo">
-                <img src="https://i.postimg.cc/zBjgFFby/Screenshot-2026-04-04-224646-removebg-preview.png" alt="Sree Child Guidance Center Logo">
+                <img src="https://i.postimg.cc/zBjgFFby/Screenshot-2026-04-04-224646-removebg-preview.png" alt="Sree Child Guidance Centre Logo">
             </div>
-            <h1>Sree Child Guidance Center</h1>
-            <p class="tagline">Speech Therapy, Occupational Therapy & Complete Care for Children</p>
+            <h1>Sree Child Guidance Centre</h1>
+            <p class="tagline">We Have Ways to Make You Communicate</p>
             
             <div class="hero-buttons">
                 <a href="https://wa.link/1nt8d1" class="btn btn-whatsapp" target="_blank">
@@ -880,7 +1170,7 @@
             </div>
 
             <div class="trust-line">
-                <span>📍</span> Available at Narapally • Boddupal • Bhongir
+                <span>🏥</span> Speech Therapy • Occupational Therapy • Complete Care for Children
             </div>
         </div>
     </section>
@@ -890,41 +1180,41 @@
         <div class="container">
             <h2 class="section-title scroll-animate">Our Services</h2>
             <div class="services-grid">
-                <div class="service-card scroll-animate">
+                <a href="speech-therapy.html" class="service-card scroll-animate">
                     <span class="service-icon">🗣️</span>
                     <h3>Speech Therapy</h3>
                     <p>Helping children communicate clearly and confidently through personalized speech development programs.</p>
-                </div>
+                </a>
 
-                <div class="service-card scroll-animate">
+                <a href="occupational-therapy.html" class="service-card scroll-animate">
                     <span class="service-icon">🧠</span>
                     <h3>Occupational Therapy</h3>
                     <p>Enhancing daily living skills, fine motor abilities, and sensory integration for better independence.</p>
-                </div>
+                </a>
 
-                <div class="service-card scroll-animate">
+                <a href="behavioral-therapy.html" class="service-card scroll-animate">
                     <span class="service-icon">🧩</span>
                     <h3>Behavioral Therapy</h3>
                     <p>Supporting positive behavior development and emotional regulation in a caring environment.</p>
-                </div>
+                </a>
 
-                <div class="service-card scroll-animate">
+                <a href="physiotherapy.html" class="service-card scroll-animate">
                     <span class="service-icon">🦵</span>
                     <h3>Physiotherapy</h3>
                     <p>Improving physical strength, coordination, and movement through specialized exercises and care.</p>
-                </div>
+                </a>
 
-                <div class="service-card scroll-animate">
+                <a href="hearing-solutions.html" class="service-card scroll-animate">
                     <span class="service-icon">👂</span>
                     <h3>Hearing Solutions</h3>
                     <p>Comprehensive hearing assessments and interventions to support auditory development.</p>
-                </div>
+                </a>
 
-                <div class="service-card scroll-animate">
+                <a href="play-school.html" class="service-card scroll-animate">
                     <span class="service-icon">🎒</span>
                     <h3>Play School for Special Kids</h3>
                     <p>A nurturing learning environment designed specifically for children with special needs.</p>
-                </div>
+                </a>
             </div>
         </div>
     </section>
@@ -994,7 +1284,7 @@
             <div class="about-content">
                 <div class="about-text scroll-animate-left">
                     <h3>Dedicated to Your Child's Development</h3>
-                    <p>At Sree Child Guidance Center, we believe every child deserves the opportunity to reach their full potential. Our team of certified therapists brings years of experience and genuine compassion to every session.</p>
+                    <p>At Sree Child Guidance Centre, we believe every child deserves the opportunity to reach their full potential. Our team of certified therapists brings years of experience and genuine compassion to every session.</p>
                     <p>We specialize in speech therapy, occupational therapy, behavioral therapy, physiotherapy, and hearing solutions. Our approach combines evidence-based practices with a warm, supportive environment that helps children thrive.</p>
                     <p>With locations in Narapally, Boddupal, and Bhongir, we're here to serve families across the region with personalized care and measurable results.</p>
                 </div>
@@ -1101,7 +1391,7 @@
     <!-- Footer -->
     <footer>
         <div class="container">
-            <p>&copy; 2024 Sree Child Guidance Center. All rights reserved. | Caring for your child's future.</p>
+            <p>&copy; 2024 Sree Child Guidance Centre. All rights reserved. | Caring for your child's future.</p>
         </div>
     </footer>
 
@@ -1122,6 +1412,47 @@
 
     <!-- JavaScript -->
     <script>
+        // Mobile Menu Toggle
+        const mobileToggle = document.querySelector('.mobile-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+
+        mobileToggle.addEventListener('click', function() {
+            this.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Mobile Dropdown Toggle
+        const dropdowns = document.querySelectorAll('.dropdown');
+        dropdowns.forEach(dropdown => {
+            dropdown.addEventListener('click', function(e) {
+                if (window.innerWidth <= 968) {
+                    e.preventDefault();
+                    this.classList.toggle('active');
+                }
+            });
+        });
+
+        // Close mobile menu when clicking on a link
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 968) {
+                    mobileToggle.classList.remove('active');
+                    navMenu.classList.remove('active');
+                }
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
         // Enhanced Scroll Animation Observer
         const observerOptions = {
             threshold: 0.15,
@@ -1132,30 +1463,25 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('active');
-                    // Optional: Unobserve after animation (performance)
-                    // observer.unobserve(entry.target);
                 }
             });
         }, observerOptions);
 
-        // Observe all animated elements
         document.querySelectorAll('.scroll-animate, .scroll-animate-left, .scroll-animate-right, .scroll-animate-scale').forEach(el => {
             observer.observe(el);
         });
 
-        // Stagger animation for service cards
+        // Stagger animations
         const serviceCards = document.querySelectorAll('.service-card');
         serviceCards.forEach((card, index) => {
             card.style.transitionDelay = `${index * 0.1}s`;
         });
 
-        // Stagger animation for feature items
         const featureItems = document.querySelectorAll('.feature-item');
         featureItems.forEach((item, index) => {
             item.style.transitionDelay = `${index * 0.15}s`;
         });
 
-        // Stagger animation for review cards
         const reviewCards = document.querySelectorAll('.review-card');
         reviewCards.forEach((card, index) => {
             card.style.transitionDelay = `${index * 0.12}s`;
@@ -1177,27 +1503,19 @@
             window.open(whatsappURL, '_blank');
         });
 
-        // Smooth Scroll for Navigation
+        // Smooth Scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
+                    const offsetTop = target.offsetTop - 80;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
                     });
                 }
             });
-        });
-
-        // Parallax effect for hero section
-        window.addEventListener('scroll', function() {
-            const scrolled = window.pageYOffset;
-            const hero = document.querySelector('.hero');
-            if (hero) {
-                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
-            }
         });
     </script>
 
