@@ -538,72 +538,160 @@
             z-index: 1;
         }
 
-        /* Reviews Section */
-        .reviews-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
+      /* Replace your existing Reviews Section CSS with this */
 
-        .review-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: var(--shadow);
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            overflow: hidden;
-        }
+.reviews-wrapper {
+    position: relative;
+    overflow: hidden;
+    padding: 1rem 0;
+}
 
-        .review-card::before {
-            content: '❝';
-            position: absolute;
-            top: -20px;
-            right: 20px;
-            font-size: 8rem;
-            color: rgba(255, 107, 157, 0.05);
-            font-family: Georgia, serif;
-            transition: all 0.5s ease;
-        }
+.reviews-container {
+    display: flex;
+    gap: 2rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    padding-bottom: 1rem;
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-color) var(--bg-light);
+}
 
-        .review-card:hover::before {
-            color: rgba(255, 107, 157, 0.15);
-            transform: scale(1.2) rotate(10deg);
-        }
+.reviews-container::-webkit-scrollbar {
+    height: 8px;
+}
 
-        .review-card:hover {
-            transform: translateY(-12px) scale(1.03);
-            box-shadow: 0 20px 50px rgba(255, 107, 157, 0.25);
-            background: linear-gradient(135deg, #ffffff 0%, #fff9fb 100%);
-        }
+.reviews-container::-webkit-scrollbar-track {
+    background: var(--bg-light);
+    border-radius: 10px;
+}
 
-        .stars {
-            color: #FFD700;
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            transition: all 0.3s ease;
-        }
+.reviews-container::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 10px;
+}
 
-        .review-card:hover .stars {
-            transform: scale(1.15);
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
-        }
+.reviews-container::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary-color);
+}
 
-        .review-text {
-            color: var(--text-dark);
-            font-style: italic;
-            margin-bottom: 1rem;
-            line-height: 1.8;
-            position: relative;
-            z-index: 1;
-        }
+.review-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+    min-width: 350px;
+    max-width: 350px;
+    flex-shrink: 0;
+}
 
-        .reviewer-name {
-            font-weight: 600;
-            color: var(--primary-color);
-            position: relative;
-            z-index: 1;
-        }
+.review-card::before {
+    content: '❝';
+    position: absolute;
+    top: -20px;
+    right: 20px;
+    font-size: 8rem;
+    color: rgba(255, 107, 157, 0.05);
+    font-family: Georgia, serif;
+    transition: all 0.5s ease;
+}
+
+.review-card:hover::before {
+    color: rgba(255, 107, 157, 0.15);
+    transform: scale(1.2) rotate(10deg);
+}
+
+.review-card:hover {
+    transform: translateY(-12px) scale(1.03);
+    box-shadow: 0 20px 50px rgba(255, 107, 157, 0.25);
+    background: linear-gradient(135deg, #ffffff 0%, #fff9fb 100%);
+}
+
+/* Responsive Design for Reviews */
+@media (max-width: 1600px) {
+    .review-card {
+        min-width: 320px;
+        max-width: 320px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .review-card {
+        min-width: 300px;
+        max-width: 300px;
+    }
+}
+
+@media (max-width: 768px) {
+    .review-card {
+        min-width: 280px;
+        max-width: 280px;
+    }
+}
+
+/* Responsive Design for Reviews */
+@media (max-width: 1200px) {
+    .review-card {
+        min-width: calc(33.333% - 1.5rem); /* Shows 3 cards */
+    }
+}
+
+@media (max-width: 968px) {
+    .review-card {
+        min-width: calc(50% - 1rem); /* Shows 2 cards */
+    }
+}
+
+@media (max-width: 768px) {
+    .review-card {
+        min-width: 280px; /* Shows 1 card on mobile */
+    }
+}
+
+/* Responsive Design for Reviews */
+@media (max-width: 1200px) {
+    .review-card {
+        min-width: calc(33.333% - 1.5rem); /* Shows 3 cards */
+    }
+}
+
+@media (max-width: 968px) {
+    .review-card {
+        min-width: calc(50% - 1rem); /* Shows 2 cards */
+    }
+}
+
+@media (max-width: 768px) {
+    .review-card {
+        min-width: 280px; /* Shows 1 card on mobile */
+    }
+}
+
+/* Responsive Design for Reviews */
+@media (max-width: 1200px) {
+    .reviews-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 968px) {
+    .reviews-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .reviews-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .review-card {
+        min-width: 280px;
+    }
+}
 
         /* About Section */
         .about-content {
@@ -1073,9 +1161,12 @@
 
             .services-grid,
             .features-grid,
-            .reviews-container,
             .locations-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .review-card {
+                min-width: 280px;
             }
         }
 
@@ -1255,23 +1346,55 @@
     <section id="reviews">
         <div class="container">
             <h2 class="section-title scroll-animate">What Parents Say</h2>
-            <div class="reviews-container">
-                <div class="review-card scroll-animate">
-                    <div class="stars">⭐⭐⭐⭐⭐</div>
-                    <p class="review-text">"We've seen noticeable improvement in our son's speech within just a few months. The therapists are wonderful and truly care about the children."</p>
-                    <p class="reviewer-name">— Priya Reddy</p>
-                </div>
+            <div class="reviews-wrapper">
+                <div class="reviews-container">
+                    <div class="review-card scroll-animate">
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                        <p class="review-text">"We've seen noticeable improvement in our son's speech within just a few months. The therapists are wonderful and truly care about the children."</p>
+                        <p class="reviewer-name">— Priya Reddy</p>
+                    </div>
 
-                <div class="review-card scroll-animate">
-                    <div class="stars">⭐⭐⭐⭐⭐</div>
-                    <p class="review-text">"Very caring and supportive staff. They take time to understand each child individually. Highly recommend for parents looking for quality therapy."</p>
-                    <p class="reviewer-name">— Rajesh Kumar</p>
-                </div>
+                    <div class="review-card scroll-animate">
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                        <p class="review-text">"Very caring and supportive staff. They take time to understand each child individually. Highly recommend for parents looking for quality therapy."</p>
+                        <p class="reviewer-name">— Rajesh Kumar</p>
+                    </div>
 
-                <div class="review-card scroll-animate">
-                    <div class="stars">⭐⭐⭐⭐⭐</div>
-                    <p class="review-text">"The occupational therapy sessions have helped our daughter tremendously with her motor skills. The environment is safe and child-friendly."</p>
-                    <p class="reviewer-name">— Swetha Rao</p>
+                    <div class="review-card scroll-animate">
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                        <p class="review-text">"The occupational therapy sessions have helped our daughter tremendously with her motor skills. The environment is safe and child-friendly."</p>
+                        <p class="reviewer-name">— Swetha Rao</p>
+                    </div>
+
+                    <div class="review-card scroll-animate">
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                        <p class="review-text">"Excellent center with dedicated professionals. My child's confidence has grown significantly since starting therapy here. Thank you SCGC!"</p>
+                        <p class="reviewer-name">— Anitha Sharma</p>
+                    </div>
+
+                    <div class="review-card scroll-animate">
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                        <p class="review-text">"The physiotherapy program has been exceptional for my son. The therapists are patient and really know how to work with special needs children."</p>
+                        <p class="reviewer-name">— Venkat Reddy</p>
+                    </div>
+
+                    <div class="review-card scroll-animate">
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                        <p class="review-text">"Professional, caring and results-oriented. Our daughter loves coming to her sessions and we can see real progress every week."</p>
+                        <p class="reviewer-name">— Lakshmi Devi</p>
+                    </div>
+
+                    <div class="review-card scroll-animate">
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                        <p class="review-text">"The behavioral therapy has made a huge difference in our child's life. The team is compassionate and highly skilled. Grateful for their support!"</p>
+                        <p class="reviewer-name">— Srinivas Rao</p>
+                    </div>
+
+                    <div class="review-card scroll-animate">
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                        <p class="review-text">"Best decision we made for our child! The play school program is amazing and tailored perfectly for kids with special needs. Highly recommended!"</p>
+                        <p class="reviewer-name">— Manjula Krishna</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1320,7 +1443,7 @@
             </div>
 
             <div class="map-container scroll-animate-scale">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.2076789919397!2d78.57691931487568!3d17.44686098805266!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb9b1c0e0e0e0f%3A0x0!2zMTfCsDI2JzQ4LjciTiA3OMKwMzQnNDQuOSJF!5e0!3m2!1sen!2sin!4v1234567890" allowfullscreen="" loading="lazy"></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3807.4862699999997!2d78.59066099999999!3d17.4087799!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb9f8df4b1ae13%3A0x4c723dfc6de0272c!2sSree%20Child%20Guidance%20Centre%20Peerzadiguda!5e0!3m2!1sen!2sin!4v1234567890123" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </div>
     </section>
