@@ -1,0 +1,1970 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special Education | Sree Child Guidance Centre</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #FF6B9D;
+            --secondary-color: #4ECDC4;
+            --accent-color: #FFE66D;
+            --text-dark: #2C3E50;
+            --text-light: #7F8C8D;
+            --bg-light: #FFF8F3;
+            --white: #FFFFFF;
+            --shadow: 0 10px 30px rgba(0,0,0,0.1);
+            --shadow-hover: 0 15px 40px rgba(0,0,0,0.15);
+            --special-ed-color: #7B68EE;
+            --special-ed-light: #F0EEFF;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* ========== NAVBAR ========== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            box-shadow: 0 5px 30px rgba(0,0,0,0.15);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-logo img {
+            height: 50px;
+            width: auto;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            padding: 0.5rem 0;
+            display: block;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Dropdown */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-toggle {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .dropdown-toggle::before {
+            content: '▼';
+            font-size: 0.65rem;
+            transition: transform 0.3s ease;
+            display: inline-block;
+        }
+
+        .dropdown:hover .dropdown-toggle::before {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            min-width: 300px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            border-radius: 10px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin-top: 1rem;
+            overflow: hidden;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            padding: 1rem 1.5rem;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: linear-gradient(135deg, rgba(255,107,157,0.1), rgba(78,205,196,0.1));
+            padding-left: 2rem;
+        }
+
+        .dropdown-item a {
+            text-decoration: none;
+            color: var(--text-dark);
+            display: block;
+            font-weight: 500;
+        }
+
+        .dropdown-item:hover a {
+            color: var(--primary-color);
+        }
+
+        /* Active nav link highlight */
+        .dropdown-item a.active-page {
+            color: var(--special-ed-color);
+            font-weight: 600;
+        }
+
+        /* Mobile Toggle */
+        .mobile-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .mobile-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--primary-color);
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(7px, 7px);
+        }
+
+        .mobile-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        /* ========== HERO SECTION ========== */
+        .hero {
+            min-height: 70vh;
+            background: linear-gradient(135deg,
+                rgba(123, 104, 238, 0.92),
+                rgba(78, 205, 196, 0.88)),
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23F0EEFF" width="1200" height="600"/><circle fill="%237B68EE" opacity="0.15" cx="200" cy="150" r="180"/><circle fill="%234ECDC4" opacity="0.15" cx="900" cy="400" r="200"/><circle fill="%23FF6B9D" opacity="0.1" cx="600" cy="300" r="150"/></svg>');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            position: relative;
+            padding: 120px 20px 60px;
+            margin-top: 80px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at center,
+                rgba(123, 104, 238, 0.2) 0%,
+                transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 850px;
+            animation: fadeInUp 1s ease;
+            z-index: 2;
+            position: relative;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+            line-height: 1.2;
+        }
+
+        .hero h1 span {
+            color: var(--accent-color);
+        }
+
+        .hero .tagline {
+            font-size: 1.2rem;
+            font-weight: 300;
+            margin-bottom: 2.5rem;
+            opacity: 0.95;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            border: none;
+            position: relative;
+            overflow: hidden;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.25);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn-primary {
+            background: var(--white);
+            color: var(--special-ed-color);
+            box-shadow: 0 5px 20px rgba(255,255,255,0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 12px 35px rgba(255,255,255,0.5);
+        }
+
+        .btn-whatsapp {
+            background: #25D366;
+            color: white;
+            box-shadow: 0 5px 20px rgba(37,211,102,0.4);
+        }
+
+        .btn-whatsapp:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 12px 35px rgba(37,211,102,0.6);
+        }
+
+        /* ========== BREADCRUMB ========== */
+        .breadcrumb {
+            background: var(--special-ed-light);
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(123,104,238,0.15);
+        }
+
+        .breadcrumb-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .breadcrumb-inner a {
+            text-decoration: none;
+            color: var(--special-ed-color);
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .breadcrumb-inner a:hover {
+            color: var(--primary-color);
+        }
+
+        .breadcrumb-inner .separator {
+            color: var(--text-light);
+        }
+
+        .breadcrumb-inner .current {
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        /* ========== CONTAINER & SECTIONS ========== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 5rem 0;
+        }
+
+        section.alt-bg {
+            background: var(--bg-light);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.3rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--special-ed-color), var(--secondary-color));
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-light);
+            font-size: 1.05rem;
+            margin-bottom: 3rem;
+            max-width: 680px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ========== INTRO SECTION ========== */
+        .intro-section {
+            background: white;
+        }
+
+        .intro-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .intro-text h2 {
+            font-size: 2rem;
+            color: var(--special-ed-color);
+            margin-bottom: 1.2rem;
+            line-height: 1.3;
+        }
+
+        .intro-text p {
+            color: var(--text-light);
+            line-height: 1.9;
+            margin-bottom: 1.2rem;
+            font-size: 1.02rem;
+        }
+
+        .intro-text p strong {
+            color: var(--text-dark);
+        }
+
+        .intro-highlight-box {
+            background: var(--special-ed-light);
+            border-left: 4px solid var(--special-ed-color);
+            padding: 1.2rem 1.5rem;
+            border-radius: 0 12px 12px 0;
+            margin-top: 1.5rem;
+            font-size: 1rem;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        .intro-image-side {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 16px;
+            padding: 1.8rem;
+            box-shadow: var(--shadow);
+            text-align: center;
+            border-top: 4px solid var(--special-ed-color);
+            transition: all 0.4s ease;
+        }
+
+        .stat-card:nth-child(2) {
+            border-top-color: var(--secondary-color);
+        }
+
+        .stat-card:nth-child(3) {
+            border-top-color: var(--primary-color);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 45px rgba(123,104,238,0.2);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--special-ed-color);
+            line-height: 1;
+            margin-bottom: 0.4rem;
+        }
+
+        .stat-card:nth-child(2) .stat-number {
+            color: var(--secondary-color);
+        }
+
+        .stat-card:nth-child(3) .stat-number {
+            color: var(--primary-color);
+        }
+
+        .stat-label {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        /* ========== PROGRAMS SECTION ========== */
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .program-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2.2rem;
+            box-shadow: var(--shadow);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            border-bottom: 4px solid transparent;
+        }
+
+        .program-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(to right, var(--special-ed-color), var(--secondary-color));
+            border-radius: 20px 20px 0 0;
+        }
+
+        .program-card:hover {
+            transform: translateY(-12px) scale(1.03);
+            box-shadow: 0 20px 50px rgba(123,104,238,0.25);
+            border-bottom-color: var(--special-ed-color);
+        }
+
+        .program-icon {
+            width: 65px;
+            height: 65px;
+            background: var(--special-ed-light);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 1.2rem;
+            transition: all 0.4s ease;
+        }
+
+        .program-card:hover .program-icon {
+            background: var(--special-ed-color);
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .program-card h3 {
+            font-size: 1.25rem;
+            color: var(--text-dark);
+            margin-bottom: 0.8rem;
+            transition: color 0.3s ease;
+        }
+
+        .program-card:hover h3 {
+            color: var(--special-ed-color);
+        }
+
+        .program-card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .program-tag {
+            display: inline-block;
+            background: var(--special-ed-light);
+            color: var(--special-ed-color);
+            font-size: 0.78rem;
+            font-weight: 600;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            margin-top: 1rem;
+            letter-spacing: 0.5px;
+        }
+
+        /* ========== WHO WE HELP SECTION ========== */
+        .conditions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .condition-card {
+            background: white;
+            border-radius: 16px;
+            padding: 1.8rem 1.5rem;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: default;
+            border: 2px solid transparent;
+        }
+
+        .condition-card:hover {
+            transform: translateY(-8px) scale(1.04);
+            border-color: var(--special-ed-color);
+            box-shadow: 0 15px 40px rgba(123,104,238,0.2);
+            background: var(--special-ed-light);
+        }
+
+        .condition-icon {
+            font-size: 2.8rem;
+            margin-bottom: 0.8rem;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+
+        .condition-card:hover .condition-icon {
+            transform: scale(1.2) rotateY(360deg);
+        }
+
+        .condition-card h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.4rem;
+            transition: color 0.3s;
+        }
+
+        .condition-card:hover h4 {
+            color: var(--special-ed-color);
+        }
+
+        .condition-card p {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        /* ========== APPROACH SECTION ========== */
+        .approach-section {
+            background: white;
+        }
+
+        .approach-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .step-item {
+            display: flex;
+            gap: 2rem;
+            align-items: flex-start;
+            background: var(--bg-light);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .step-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--special-ed-color), var(--secondary-color));
+            border-radius: 4px 0 0 4px;
+        }
+
+        .step-item:hover {
+            transform: translateX(10px);
+            box-shadow: var(--shadow);
+            background: white;
+        }
+
+        .step-number {
+            min-width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--special-ed-color), var(--secondary-color));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            font-weight: 700;
+            flex-shrink: 0;
+            box-shadow: 0 5px 15px rgba(123,104,238,0.3);
+        }
+
+        .step-content h4 {
+            font-size: 1.15rem;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .step-content p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* ========== FEATURES GRID ========== */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-item {
+            text-align: center;
+            padding: 2.2rem 1.8rem;
+            background: white;
+            border-radius: 18px;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 0;
+            background: linear-gradient(to top, rgba(123,104,238,0.08), transparent);
+            transition: height 0.4s ease;
+        }
+
+        .feature-item:hover::after {
+            height: 100%;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-10px) scale(1.04);
+            box-shadow: 0 20px 45px rgba(123,104,238,0.2);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+            transition: all 0.5s ease;
+        }
+
+        .feature-item:hover .feature-icon {
+            transform: scale(1.3) rotateZ(15deg);
+        }
+
+        .feature-item h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+            position: relative;
+            z-index: 1;
+        }
+
+        .feature-item p {
+            color: var(--text-light);
+            font-size: 0.92rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ========== TOOLS SECTION ========== */
+        .tools-section {
+            background: white;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .tool-item {
+            background: var(--special-ed-light);
+            border-radius: 14px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            border: 2px solid transparent;
+        }
+
+        .tool-item:hover {
+            transform: translateY(-6px);
+            border-color: var(--special-ed-color);
+            box-shadow: 0 10px 30px rgba(123,104,238,0.2);
+            background: white;
+        }
+
+        .tool-emoji {
+            font-size: 2.5rem;
+            margin-bottom: 0.7rem;
+            display: block;
+        }
+
+        .tool-item h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        /* ========== FAQ SECTION ========== */
+        .faq-section {
+            background: var(--bg-light);
+        }
+
+        .faq-list {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .faq-item {
+            background: white;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.06);
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            box-shadow: 0 8px 25px rgba(123,104,238,0.15);
+        }
+
+        .faq-question {
+            padding: 1.4rem 1.8rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+
+        .faq-question:hover {
+            color: var(--special-ed-color);
+        }
+
+        .faq-question .faq-icon {
+            font-size: 1.2rem;
+            color: var(--special-ed-color);
+            transition: transform 0.3s ease;
+            min-width: 24px;
+            text-align: center;
+        }
+
+        .faq-item.open .faq-question {
+            color: var(--special-ed-color);
+            background: var(--special-ed-light);
+        }
+
+        .faq-item.open .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.3s ease;
+        }
+
+        .faq-answer-inner {
+            padding: 0 1.8rem 1.4rem;
+            color: var(--text-light);
+            line-height: 1.8;
+            font-size: 0.97rem;
+        }
+
+        .faq-item.open .faq-answer {
+            max-height: 300px;
+        }
+
+        /* ========== CTA SECTION ========== */
+        .cta-section {
+            background: linear-gradient(135deg, var(--special-ed-color), var(--secondary-color));
+            color: white;
+            text-align: center;
+            padding: 5rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -60px;
+            right: -60px;
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.08);
+            pointer-events: none;
+        }
+
+        .cta-section::after {
+            content: '';
+            position: absolute;
+            bottom: -80px;
+            left: -80px;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.06);
+            pointer-events: none;
+        }
+
+        .cta-section h2 {
+            font-size: 2.4rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-section p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-cta-white {
+            background: white;
+            color: var(--special-ed-color);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.4s ease;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-cta-white:hover {
+            transform: translateY(-5px) scale(1.06);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.2);
+        }
+
+        .btn-cta-outline {
+            background: transparent;
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.4s ease;
+            font-size: 1rem;
+            border: 2px solid rgba(255,255,255,0.7);
+            font-family: 'Poppins', sans-serif;
+            cursor: pointer;
+        }
+
+        .btn-cta-outline:hover {
+            background: rgba(255,255,255,0.15);
+            border-color: white;
+            transform: translateY(-5px) scale(1.06);
+        }
+
+        /* ========== FLOATING WHATSAPP ========== */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 70px;
+            height: 70px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: white;
+            box-shadow: 0 5px 20px rgba(37,211,102,0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            animation: float 3s ease-in-out infinite;
+            text-decoration: none;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.2) rotate(10deg);
+            box-shadow: 0 10px 40px rgba(37,211,102,0.8);
+        }
+
+        .whatsapp-float::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: #25D366;
+            animation: pulse 2s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        /* ========== STICKY ACTIONS (MOBILE) ========== */
+        .sticky-actions {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 1rem;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
+            z-index: 999;
+            gap: 1rem;
+        }
+
+        .btn-call {
+            background: var(--white);
+            color: var(--primary-color);
+            box-shadow: 0 5px 20px rgba(255,255,255,0.4);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-call:hover {
+            transform: translateY(-5px) scale(1.05);
+            background: var(--primary-color);
+            color: white;
+        }
+
+        /* ========== FOOTER ========== */
+        footer {
+            background: var(--text-dark);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        footer p {
+            opacity: 0.8;
+        }
+
+        /* ========== ANIMATIONS ========== */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-50px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50%       { transform: translateY(-10px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50%       { opacity: 0;   transform: scale(1.5); }
+        }
+
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .scroll-animate.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .scroll-animate-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .scroll-animate-left.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .scroll-animate-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .scroll-animate-right.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .scroll-animate-scale {
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .scroll-animate-scale.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 968px) {
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 80px;
+                flex-direction: column;
+                background: white;
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 27px rgba(0,0,0,0.05);
+                padding: 2rem 0;
+                gap: 0;
+                z-index: 999;
+            }
+
+            .nav-menu.active { left: 0; }
+
+            .nav-item {
+                width: 100%;
+                padding: 1rem 0;
+            }
+
+            .dropdown-menu {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+                box-shadow: none;
+                margin-top: 0.5rem;
+                display: none;
+                min-width: unset;
+            }
+
+            .dropdown.active .dropdown-menu { display: block; }
+
+            .mobile-toggle { display: flex; }
+
+            .intro-grid {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .intro-image-side {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+
+            .stat-card {
+                flex: 1;
+                min-width: 140px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .hero .tagline { font-size: 1rem; }
+            .section-title { font-size: 1.8rem; }
+
+            .step-item {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .sticky-actions { display: flex; }
+            .whatsapp-float { display: none; }
+
+            .cta-section h2 { font-size: 1.8rem; }
+
+            .intro-image-side {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ========== NAVBAR ========== -->
+<nav class="navbar">
+    <div class="nav-container">
+        <a href="index.html" class="nav-logo">
+            <img src="https://i.postimg.cc/zBjgFFby/Screenshot-2026-04-04-224646-removebg-preview.png"
+                 alt="Sree Child Guidance Centre Logo">
+            <span>SREE CHILD GUIDANCE CENTRE</span>
+        </a>
+
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="index.html" class="nav-link">Home</a>
+            </li>
+            <li class="nav-item dropdown">
+                <span class="nav-link dropdown-toggle">Services</span>
+                <div class="dropdown-menu">
+                    <div class="dropdown-item">
+                        <a href="speech-therapy.html">Speech Therapy</a>
+                    </div>
+                    <div class="dropdown-item">
+                        <a href="occupational-therapy.html">Occupational Therapy</a>
+                    </div>
+                    <div class="dropdown-item">
+                        <a href="behavioral-therapy.html">Behavioral Therapy</a>
+                    </div>
+                    <div class="dropdown-item">
+                        <a href="physiotherapy.html">Physiotherapy</a>
+                    </div>
+                    <div class="dropdown-item">
+                        <a href="hearing-solutions.html">Hearing Solutions</a>
+                    </div>
+                    <div class="dropdown-item">
+                        <a href="play-school.html">Play School for Special Kids</a>
+                    </div>
+                    <div class="dropdown-item">
+                        <a href="special-education.html" class="active-page">Special Education</a>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a href="index.html#about" class="nav-link">About</a>
+            </li>
+            <li class="nav-item">
+                <a href="index.html#reviews" class="nav-link">Reviews</a>
+            </li>
+            <li class="nav-item">
+                <a href="index.html#locations" class="nav-link">Locations</a>
+            </li>
+            <li class="nav-item">
+                <a href="index.html#contact" class="nav-link">Contact</a>
+            </li>
+        </ul>
+
+        <div class="mobile-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</nav>
+
+<!-- ========== BREADCRUMB ========== -->
+<div class="breadcrumb" style="margin-top:80px;">
+    <div class="breadcrumb-inner">
+        <a href="index.html">🏠 Home</a>
+        <span class="separator">›</span>
+        <a href="index.html#services">Services</a>
+        <span class="separator">›</span>
+        <span class="current">Special Education</span>
+    </div>
+</div>
+
+<!-- ========== HERO SECTION ========== -->
+<section class="hero">
+    <div class="hero-content">
+        <div class="hero-badge">🎓 Empowering Every Learner</div>
+        <h1>Special <span>Education</span> Programme</h1>
+        <p class="tagline">
+            Individualized, compassionate academic support designed to unlock
+            the unique potential in every child with special learning needs.
+        </p>
+        <div class="hero-buttons">
+            <a href="index.html#contact" class="btn btn-primary">
+                📋 Book a Free Assessment
+            </a>
+            <a href="https://wa.link/1nt8d1" class="btn btn-whatsapp" target="_blank">
+                💬 Chat on WhatsApp
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ========== INTRO SECTION ========== -->
+<section class="intro-section">
+    <div class="container">
+        <div class="intro-grid">
+            <div class="intro-text scroll-animate-left">
+                <h2>What is Special Education at SCGC?</h2>
+                <p>
+                    At <strong>Sree Child Guidance Centre</strong>, our Special Education programme
+                    goes beyond conventional classroom learning. We create individualized
+                    education plans (IEPs) that are thoughtfully crafted to match every
+                    child's unique learning style, pace, and abilities.
+                </p>
+                <p>
+                    Our certified special educators work hand-in-hand with therapists,
+                    parents, and caregivers to ensure a <strong>holistic, integrated approach</strong>
+                    that bridges academic learning with real-life functional skills — building
+                    independence, confidence, and joy in learning.
+                </p>
+                <p>
+                    Whether your child is diagnosed with Autism Spectrum Disorder, Down
+                    Syndrome, Intellectual Disability, ADHD, or any other developmental
+                    challenge — we are here to support their educational journey
+                    every step of the way.
+                </p>
+                <div class="intro-highlight-box">
+                    💡 "Every child is a born learner. Our job is to find the right
+                    key to unlock their potential."
+                </div>
+            </div>
+
+            <div class="intro-image-side scroll-animate-right">
+                <div class="stat-card scroll-animate-scale">
+                    <div class="stat-number">100+</div>
+                    <div class="stat-label">Children Supported Through Special Education</div>
+                </div>
+                <div class="stat-card scroll-animate-scale">
+                    <div class="stat-number">IEP</div>
+                    <div class="stat-label">Fully Individualized Education Plans for Every Child</div>
+                </div>
+                <div class="stat-card scroll-animate-scale">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">Convenient Locations — Narapally, Boddupal & Bhongir</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== PROGRAMS SECTION ========== -->
+<section class="alt-bg">
+    <div class="container">
+        <h2 class="section-title scroll-animate">Our Special Education Programmes</h2>
+        <p class="section-subtitle scroll-animate">
+            Structured, goal-driven programmes tailored to meet children at their
+            level and guide them forward with confidence.
+        </p>
+        <div class="programs-grid">
+
+            <div class="program-card scroll-animate">
+                <div class="program-icon">📖</div>
+                <h3>Early Literacy & Pre-Academic Skills</h3>
+                <p>
+                    Building foundational skills like letter recognition, phonemic
+                    awareness, number concepts, and pre-writing skills using
+                    multi-sensory techniques suited to each child's learning style.
+                </p>
+                <span class="program-tag">Ages 2–6</span>
+            </div>
+
+            <div class="program-card scroll-animate">
+                <div class="program-icon">🧮</div>
+                <h3>Functional Academics</h3>
+                <p>
+                    Teaching real-world academic skills such as reading signs,
+                    counting money, understanding time, and practical numeracy —
+                    equipping children for everyday independence.
+                </p>
+                <span class="program-tag">All Ages</span>
+            </div>
+
+            <div class="program-card scroll-animate">
+                <div class="program-icon">🗣️</div>
+                <h3>Communication & Language Development</h3>
+                <p>
+                    Strengthening verbal and non-verbal communication through
+                    structured language activities, AAC devices, picture exchange
+                    systems (PECS), and social communication training.
+                </p>
+                <span class="program-tag">All Ages</span>
+            </div>
+
+            <div class="program-card scroll-animate">
+                <div class="program-icon">🤝</div>
+                <h3>Life Skills & Independence Training</h3>
+                <p>
+                    Practical life skills including personal hygiene, dressing,
+                    meal preparation, community navigation, and self-care —
+                    building meaningful independence for long-term wellbeing.
+                </p>
+                <span class="program-tag">Ages 5+</span>
+            </div>
+
+            <div class="program-card scroll-animate">
+                <div class="program-icon">🎨</div>
+                <h3>Sensory & Play-Based Learning</h3>
+                <p>
+                    Using structured play, arts & crafts, sensory activities, and
+                    exploratory learning to develop cognitive, creative, and
+                    social skills in a fun, low-pressure environment.
+                </p>
+                <span class="program-tag">Ages 2–8</span>
+            </div>
+
+            <div class="program-card scroll-animate">
+                <div class="program-icon">👨‍👩‍👧</div>
+                <h3>Parent & Family Training</h3>
+                <p>
+                    Empowering families with strategies, tools, and knowledge to
+                    support their child's learning at home — reinforcing progress
+                    and building a consistent support system around the child.
+                </p>
+                <span class="program-tag">For Parents</span>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ========== WHO WE HELP ========== -->
+<section class="approach-section">
+    <div class="container">
+        <h2 class="section-title scroll-animate">Who We Support</h2>
+        <p class="section-subtitle scroll-animate">
+            Our Special Education programme is designed for children with a
+            wide range of developmental and learning needs.
+        </p>
+        <div class="conditions-grid">
+
+            <div class="condition-card scroll-animate-scale">
+                <span class="condition-icon">🧩</span>
+                <h4>Autism Spectrum Disorder</h4>
+                <p>ASD & related conditions</p>
+            </div>
+
+            <div class="condition-card scroll-animate-scale">
+                <span class="condition-icon">🌟</span>
+                <h4>Down Syndrome</h4>
+                <p>Trisomy 21 & variants</p>
+            </div>
+
+            <div class="condition-card scroll-animate-scale">
+                <span class="condition-icon">⚡</span>
+                <h4>ADHD</h4>
+                <p>Attention & hyperactivity</p>
+            </div>
+
+            <div class="condition-card scroll-animate-scale">
+                <span class="condition-icon">🧠</span>
+                <h4>Intellectual Disability</h4>
+                <p>Mild to moderate ID</p>
+            </div>
+
+            <div class="condition-card scroll-animate-scale">
+                <span class="condition-icon">📝</span>
+                <h4>Learning Disabilities</h4>
+                <p>Dyslexia, dyscalculia & more</p>
+            </div>
+
+            <div class="condition-card scroll-animate-scale">
+                <span class="condition-icon">🦋</span>
+                <h4>Developmental Delays</h4>
+                <p>Global & specific delays</p>
+            </div>
+
+            <div class="condition-card scroll-animate-scale">
+                <span class="condition-icon">👂</span>
+                <h4>Hearing Impairment</h4>
+                <p>Deaf & hard of hearing</p>
+            </div>
+
+            <div class="condition-card scroll-animate-scale">
+                <span class="condition-icon">👁️</span>
+                <h4>Visual Impairment</h4>
+                <p>Low vision & blindness support</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ========== OUR APPROACH ========== -->
+<section class="alt-bg">
+    <div class="container">
+        <h2 class="section-title scroll-animate">Our Step-by-Step Approach</h2>
+        <p class="section-subtitle scroll-animate">
+            A structured, child-centered process that ensures every child
+            receives the right support from day one.
+        </p>
+        <div class="approach-steps">
+
+            <div class="step-item scroll-animate">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h4>🔍 Comprehensive Assessment</h4>
+                    <p>
+                        We begin with a thorough evaluation of your child's cognitive,
+                        communicative, social, and academic abilities — using standardized
+                        tools and direct observation to build a complete profile.
+                    </p>
+                </div>
+            </div>
+
+            <div class="step-item scroll-animate">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h4>📋 Individualized Education Plan (IEP)</h4>
+                    <p>
+                        Based on assessment results, our special educators collaborate with
+                        therapists and parents to develop a personalized IEP with clear,
+                        measurable goals and a realistic timeline.
+                    </p>
+                </div>
+            </div>
+
+            <div class="step-item scroll-animate">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h4>🎯 Targeted, Engaging Sessions</h4>
+                    <p>
+                        Sessions are conducted using evidence-based methods including
+                        Applied Behavior Analysis (ABA), Structured Teaching (TEACCH),
+                        and multi-sensory learning — adapted to each child's pace.
+                    </p>
+                </div>
+            </div>
+
+            <div class="step-item scroll-animate">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h4>📊 Regular Progress Monitoring</h4>
+                    <p>
+                        We track each child's progress continuously and adjust the plan
+                        as needed — ensuring goals remain challenging yet achievable,
+                        and celebrating every milestone along the way.
+                    </p>
+                </div>
+            </div>
+
+            <div class="step-item scroll-animate">
+                <div class="step-number">5</div>
+                <div class="step-content">
+                    <h4>🏠 Home & Community Carryover</h4>
+                    <p>
+                        We train parents and caregivers with practical strategies to
+                        reinforce learning at home and in the community — ensuring
+                        skills transfer beyond the therapy room.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ========== WHY CHOOSE US ========== -->
+<section>
+    <div class="container">
+        <h2 class="section-title scroll-animate">Why Choose SCGC for Special Education?</h2>
+        <p class="section-subtitle scroll-animate">
+            We combine expertise, empathy, and evidence-based practice to deliver
+            outcomes that truly make a difference in children's lives.
+        </p>
+        <div class="features-grid">
+
+            <div class="feature-item scroll-animate-scale">
+                <span class="feature-icon">🎓</span>
+                <h4>Certified Special Educators</h4>
+                <p>Our educators hold recognized qualifications in Special Education and bring years of hands-on experience.</p>
+            </div>
+
+            <div class="feature-item scroll-animate-scale">
+                <span class="feature-icon">📐</span>
+                <h4>Truly Individualized Plans</h4>
+                <p>No two IEPs are alike — every plan is built around your child's unique profile, strengths, and goals.</p>
+            </div>
+
+            <div class="feature-item scroll-animate-scale">
+                <span class="feature-icon">🔗</span>
+                <h4>Integrated Therapy Approach</h4>
+                <p>Special education works alongside speech, OT, and behavioral therapy for a seamlessly coordinated care plan.</p>
+            </div>
+
+            <div class="feature-item scroll-animate-scale">
+                <span class="feature-icon">💛</span>
+                <h4>Compassionate, Patient Educators</h4>
+                <p>Our team leads with kindness and patience — creating a safe space where every child feels valued and capable.</p>
+            </div>
+
+            <div class="feature-item scroll-animate-scale">
+                <span class="feature-icon">📈</span>
+                <h4>Measurable Progress & Reports</h4>
+                <p>Regular progress reports keep parents informed, involved, and confident in their child's developmental journey.</p>
+            </div>
+
+            <div class="feature-item scroll-animate-scale">
+                <span class="feature-icon">🏡</span>
+                <h4>Family-Centred Practice</h4>
+                <p>We partner with families as active co-educators — building skills and strategies that extend learning every day.</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ========== TOOLS & METHODS ========== -->
+<section class="tools-section alt-bg">
+    <div class="container">
+        <h2 class="section-title scroll-animate">Tools & Methods We Use</h2>
+        <p class="section-subtitle scroll-animate">
+            Research-backed techniques and creative tools to make learning
+            effective, engaging, and enjoyable for every child.
+        </p>
+        <div class="tools-grid">
+
+            <div class="tool-item scroll-animate">
+                <span class="tool-emoji">🔲</span>
+                <h4>TEACCH Structured Teaching</h4>
+            </div>
+
+            <div class="tool-item scroll-animate">
+                <span class="tool-emoji">📊</span>
+                <h4>Applied Behavior Analysis (ABA)</h4>
+            </div>
+
+            <div class="tool-item scroll-animate">
+                <span class="tool-emoji">🖼️</span>
+                <h4>PECS (Picture Exchange Communication)</h4>
+            </div>
+
+            <div class="tool-item scroll-animate">
+                <span class="tool-emoji">🎮</span>
+                <h4>Play-Based & Gamified Learning</h4>
+            </div>
+
+            <div class="tool-item scroll-animate">
+                <span class="tool-emoji">📱</span>
+                <h4>AAC Devices & Apps</h4>
+            </div>
+
+            <div class="tool-item scroll-animate">
+                <span class="tool-emoji">🧸</span>
+                <h4>Sensory Integration Activities</h4>
+            </div>
+
+            <div class="tool-item scroll-animate">
+                <span class="tool-emoji">✏️</span>
+                <h4>Multi-Sensory Reading & Writing</h4>
+            </div>
+
+            <div class="tool-item scroll-animate">
+                <span class="tool-emoji">🗂️</span>
+                <h4>Task Analysis & Chaining</h4>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ========== FAQ SECTION ========== -->
+<section class="faq-section">
+    <div class="container">
+        <h2 class="section-title scroll-animate">Frequently Asked Questions</h2>
+        <p class="section-subtitle scroll-animate">
+            Answers to the questions parents most often ask us about
+            our Special Education programme.
+        </p>
+        <div class="faq-list">
+
+            <div class="faq-item scroll-animate">
+                <div class="faq-question">
+                    What age group does your Special Education programme support?
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        We support children from as young as 2 years old through adolescence.
+                        Early intervention is highly effective, but it is never too late to
+                        begin — our programmes are adapted to suit children at any stage
+                        of their developmental journey.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item scroll-animate">
+                <div class="faq-question">
+                    How is an IEP (Individualized Education Plan) created for my child?
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        After a comprehensive initial assessment, our special educators,
+                        therapists, and parents collaborate to design a personalised plan.
+                        The IEP includes short-term and long-term goals, teaching strategies,
+                        resources needed, and regular review checkpoints to track progress.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item scroll-animate">
+                <div class="faq-question">
+                    How often will my child attend Special Education sessions?
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        Session frequency is determined individually based on the child's
+                        needs, goals, and the recommendations of our team. Many children
+                        attend 3–5 sessions per week, and this can be combined with
+                        other therapies for maximum benefit.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item scroll-animate">
+                <div class="faq-question">
+                    Can Special Education be combined with other therapies at SCGC?
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        Absolutely — and this is where SCGC truly excels. Our integrated
+                        model means your child's special educator works closely with our
+                        speech therapists, occupational therapists, and behavioral therapists
+                        to ensure a coordinated, holistic approach to development.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item scroll-animate">
+                <div class="faq-question">
+                    How will I know if my child is making progress?
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        We provide regular progress reports and parent feedback meetings.
+                        Progress is measured against the IEP goals using data-driven
+                        tracking. You will always know exactly where your child stands
+                        and what the next steps look like.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item scroll-animate">
+                <div class="faq-question">
+                    Do you provide training to parents as well?
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        Yes! We strongly believe parents are a child's most important
+                        educators. We provide structured parent training sessions that
+                        equip you with practical strategies to support your child's
+                        learning at home and reinforce the skills taught in sessions.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ========== CTA SECTION ========== -->
+<section class="cta-section">
+    <div class="container">
+        <h2>Ready to Begin Your Child's Learning Journey?</h2>
+        <p>
+            Take the first step today. Book a free assessment with our Special
+            Education team and discover how we can support your child's
+            unique potential.
+        </p>
+        <div class="cta-buttons">
+            <a href="index.html#contact" class="btn-cta-white">
+                📋 Book a Free Assessment
+            </a>
+            <a href="https://wa.link/1nt8d1" class="btn-cta-outline" target="_blank">
+                💬 WhatsApp Us Now
+            </a>
+            <a href="tel:+917680963882" class="btn-cta-outline">
+                📞 Call +91 76809 63882
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer>
+    <div class="container">
+        <p>
+            &copy; 2024 Sree Child Guidance Centre. All rights reserved.
+            | Caring for your child's future.
+        </p>
+    </div>
+</footer>
+
+<!-- Floating WhatsApp -->
+<a href="https://wa.link/1nt8d1" class="whatsapp-float" target="_blank">💬</a>
+
+<!-- Sticky Actions (Mobile) -->
+<div class="sticky-actions">
+    <a href="https://wa.link/1nt8d1"
+       class="btn btn-whatsapp"
+       style="flex:1; justify-content:center;"
+       target="_blank">
+        💬 WhatsApp
+    </a>
+    <a href="tel:+917680963882"
+       class="btn btn-call"
+       style="flex:1; justify-content:center;">
+        📞 Call Now
+    </a>
+</div>
+
+<!-- ========== JAVASCRIPT ========== -->
+<script>
+    /* ---------- Mobile Menu ---------- */
+    const mobileToggle = document.querySelector('.mobile-toggle');
+    const navMenu      = document.querySelector('.nav-menu');
+
+    mobileToggle.addEventListener('click', function () {
+        this.classList.toggle('active');
+        navMenu.classList.toggle('active');
+    });
+
+    /* Mobile dropdown */
+    document.querySelectorAll('.dropdown').forEach(dd => {
+        dd.addEventListener('click', function (e) {
+            if (window.innerWidth <= 968) {
+                e.stopPropagation();
+                this.classList.toggle('active');
+            }
+        });
+    });
+
+    /* Close menu on nav-link click */
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+            if (window.innerWidth <= 968) {
+                mobileToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+            }
+        });
+    });
+
+    /* ---------- Navbar scroll effect ---------- */
+    window.addEventListener('scroll', () => {
+        document.querySelector('.navbar')
+                .classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    /* ---------- Scroll Animations ---------- */
+    const observerOptions = {
+        threshold: 0.12,
+        rootMargin: '0px 0px -60px 0px'
+    };
+
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll(
+        '.scroll-animate, .scroll-animate-left, .scroll-animate-right, .scroll-animate-scale'
+    ).forEach(el => observer.observe(el));
+
+    /* Stagger delays */
+    document.querySelectorAll('.program-card').forEach((c, i) => {
+        c.style.transitionDelay = `${i * 0.1}s`;
+    });
+    document.querySelectorAll('.condition-card').forEach((c, i) => {
+        c.style.transitionDelay = `${i * 0.08}s`;
+    });
+    document.querySelectorAll('.feature-item').forEach((c, i) => {
+        c.style.transitionDelay = `${i * 0.1}s`;
+    });
+    document.querySelectorAll('.tool-item').forEach((c, i) => {
+        c.style.transitionDelay = `${i * 0.07}s`;
+    });
+
+    /* ---------- FAQ Accordion ---------- */
+    document.querySelectorAll('.faq-question').forEach(question => {
+        question.addEventListener('click', () => {
+            const item   = question.parentElement;
+            const isOpen = item.classList.contains('open');
+
+            /* Close all */
+            document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+
+            /* Open clicked (toggle) */
+            if (!isOpen) item.classList.add('open');
+        });
+    });
+
+    /* ---------- Smooth Scroll ---------- */
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                window.scrollTo({
+                    top: target.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+</script>
+</body>
+</html>
