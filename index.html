@@ -35,7 +35,7 @@
         html {
             scroll-behavior: smooth;
         }
-
+        
        /* Navigation Bar */
 .navbar {
     position: fixed;
@@ -371,8 +371,8 @@
             filter: drop-shadow(0 8px 25px rgba(0, 0, 0, 0.4));
         }
 
-        .hero h2 {
-            font-size: 3.0rem;
+        .hero h1 {
+            font-size: 1.5rem;
             font-weight: 700;
             margin-bottom: 1rem;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
@@ -1325,11 +1325,12 @@
                         <a href="hearing-solutions.html">👂 Hearing Solutions</a>
                     </div>
                     <div class="dropdown-item">
-                        <a href="play-school.html">🎒 Play School for Special Kids</a>
-                    </div>
-                    <div class="dropdown-item">
                         <a href="special-education.html">📚 Special Education</a>
                     </div>
+                    <div class="dropdown-item">
+                        <a href="play-school.html">🎒 Play School for Special Kids</a>
+                    </div>
+                    
                 </div>
             </li>
             <li class="nav-item">
@@ -1360,7 +1361,47 @@
             <div class="hero-logo">
                 <img src="https://i.postimg.cc/zBjgFFby/Screenshot-2026-04-04-224646-removebg-preview.png" alt="Sree Child Guidance Centre Logo">
             </div>
-            <h2>We Have Ways to Make You Communicate</h2>
+            <h1 class="typewriter">
+  <span id="text"></span><span class="cursor"></span>
+</h1>
+
+<style>
+.typewriter {
+  font-size: 1.5rem;
+  font-weight: normal; /* optional, since h1 is bold by default */
+}
+
+.cursor {
+  display: inline-block;
+  width: 3px;
+  height: 1em;
+  background-color: black;
+  margin-left: 6px;
+  animation: blink 1s infinite;
+  vertical-align: bottom;
+}
+
+@keyframes blink {
+  0%, 50%, 100% { opacity: 1; }
+  25%, 75% { opacity: 0; }
+}
+</style>
+
+<<script>
+const message = "❝We Have Ways to Make You Communicate..❞";
+const speed = 120; // slower (was 70)
+let i = 0;
+
+function typeWriter() {
+  if (i < message.length) {
+    document.getElementById("text").textContent += message.charAt(i);
+    i++;
+    setTimeout(typeWriter, speed);
+  }
+}
+
+typeWriter();
+</script>
             
             <div class="hero-buttons">
                 <a href="https://wa.link/1nt8d1" class="btn btn-whatsapp" target="_blank">
@@ -1408,17 +1449,18 @@
                     <h3>Hearing Solutions</h3>
                     <p>Comprehensive hearing assessments and interventions to support auditory development.</p>
                 </a>
+                <a href="special-education.html" class="service-card scroll-animate">
+    <span class="service-icon">📚</span>
+    <h3>Special Education</h3>
+    <p>Individualized academic support and learning programs designed to help children with special needs achieve their educational goals.</p>
+</a>
 
                 <a href="play-school.html" class="service-card scroll-animate">
                     <span class="service-icon">🎒</span>
                     <h3>Play School for Special Kids</h3>
                     <p>A nurturing learning environment designed specifically for children with special needs.</p>
                 </a>
-                <a href="special-education.html" class="service-card scroll-animate">
-    <span class="service-icon">📚</span>
-    <h3>Special Education</h3>
-    <p>Individualized academic support and learning programs designed to help children with special needs achieve their educational goals.</p>
-</a>
+                
             </div>
         </div>
     </section>
