@@ -1,8 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sree Child Guidance Centre - Expert Speech Therapy, Occupational Therapy, Behavioral Therapy & more for children in Narapally, Boddupal & Bhongir">
+    <title>Sree Child Guidance Centre - Child Development & Therapy</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -22,7 +25,6 @@
             --bg-light: #FFF8F3;
             --white: #FFFFFF;
             --shadow: 0 10px 30px rgba(0,0,0,0.1);
-            --shadow-hover: 0 15px 40px rgba(0,0,0,0.15);
         }
 
         body {
@@ -30,439 +32,563 @@
             color: var(--text-dark);
             line-height: 1.6;
             overflow-x: hidden;
+            background:
+                linear-gradient(rgba(255,255,255,0.78), rgba(255,255,255,0.78)),
+                url('https://images.unsplash.com/photo-1544776193-352d25ca82cd?w=1600') center/cover fixed;
         }
 
-        html {
-            scroll-behavior: smooth;
+        /* Watermark */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: url('https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=400') center/400px repeat;
+            opacity: 0.08;
+            pointer-events: none;
+            z-index: 0;
+            animation: watermarkFloat 20s ease-in-out infinite;
         }
-        
-       /* Navigation Bar */
-.navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    background: rgba(255, 255, 255, 0.98);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 2px 20px rgba(0,0,0,0.1);
-    z-index: 1000;
-    transition: all 0.3s ease;
-}
 
-.navbar.scrolled {
-    box-shadow: 0 5px 30px rgba(0,0,0,0.15);
-}
+        @keyframes watermarkFloat {
+            0%,100% { background-position: 0 0; }
+            50%      { background-position: 100px 100px; }
+        }
 
-.nav-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 80px;
-}
+        html { scroll-behavior: smooth; }
 
-.nav-logo {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: var(--primary-color);
-    text-decoration: none;
-}
+        /* Progress Bar */
+        .progress-bar {
+            position: fixed;
+            top: 0; left: 0;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            z-index: 9999;
+            transition: width .2s ease;
+        }
 
-.nav-logo img {
-    height: 50px;
-    width: auto;
-}
+        /* ══════════════════════════════════════
+           NAVBAR
+        ══════════════════════════════════════ */
+        .navbar {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            background: rgba(255,255,255,0.98);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            z-index: 1000;
+            transition: all .3s ease;
+        }
 
-/* ── Desktop menu ── */
-.nav-menu {
-    display: flex;
-    list-style: none;
-    gap: 2rem;
-    align-items: center;
-}
+        .navbar.scrolled {
+            box-shadow: 0 5px 30px rgba(0,0,0,0.15);
+        }
 
-.nav-item {
-    position: relative;
-}
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
 
-.nav-link {
-    text-decoration: none;
-    color: var(--text-dark);
-    font-weight: 500;
-    font-size: 1rem;
-    transition: color 0.3s ease;
-    padding: 0.5rem 0;
-    display: block;
-    position: relative;
-    cursor: pointer;
-    background: none;
-    border: none;
-    font-family: 'Poppins', sans-serif;
-}
-
-.nav-link:hover {
-    color: var(--primary-color);
-}
-
-.nav-link::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
-    transition: width 0.3s ease;
-}
-
-.nav-link:hover::after {
-    width: 100%;
-}
-
-/* ── Dropdown toggle arrow ── */
-.dropdown-toggle {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    user-select: none;
-}
-
-/* ── Desktop dropdown ── */
-.dropdown-menu {
-    position: absolute;
-    top: calc(100% + 12px);
-    left: 0;
-    background: white;
-    min-width: 280px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.15);
-    border-radius: 12px;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(10px);
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    overflow: hidden;
-    z-index: 2000;
-}
-
-/* Desktop hover open */
-@media (min-width: 969px) {
-    .dropdown:hover .dropdown-menu {
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(0);
-    }
-}
-
-.dropdown-item {
-    border-bottom: 1px solid rgba(0,0,0,0.05);
-}
-
-.dropdown-item:last-child {
-    border-bottom: none;
-}
-
-.dropdown-item a {
-    display: block;
-    padding: 0.9rem 1.5rem;
-    text-decoration: none;
-    color: var(--text-dark);
-    font-weight: 500;
-    font-size: 0.95rem;
-    transition: all 0.25s ease;
-}
-
-.dropdown-item a:hover {
-    background: linear-gradient(135deg, rgba(255,107,157,0.08), rgba(78,205,196,0.08));
-    color: var(--primary-color);
-    padding-left: 2rem;
-}
-
-/* ── Mobile toggle button ── */
-.mobile-toggle {
-    display: none;
-    flex-direction: column;
-    gap: 5px;
-    cursor: pointer;
-    padding: 8px;
-    z-index: 1100;
-    background: none;
-    border: none;
-}
-
-.mobile-toggle span {
-    width: 25px;
-    height: 3px;
-    background: var(--primary-color);
-    border-radius: 3px;
-    transition: all 0.3s ease;
-    display: block;
-}
-
-.mobile-toggle.active span:nth-child(1) {
-    transform: rotate(45deg) translate(6px, 6px);
-}
-
-.mobile-toggle.active span:nth-child(2) {
-    opacity: 0;
-    transform: translateX(-10px);
-}
-
-.mobile-toggle.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(6px, -6px);
-}
-
-/* ══════════════════════════════════
-   MOBILE  (≤ 968px)
-══════════════════════════════════ */
-@media (max-width: 968px) {
-
-    .mobile-toggle {
-        display: flex;
-    }
-
-    /* Slide-in full-width menu */
-    .nav-menu {
-        position: fixed;
-        top: 80px;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        flex-direction: column;
-        background: white;
-        padding: 1.5rem 0 6rem;   /* bottom pad clears sticky bar */
-        gap: 0;
-        overflow-y: auto;
-        transform: translateX(100%);
-        transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-        box-shadow: -5px 0 30px rgba(0,0,0,0.1);
-        align-items: stretch;     /* full width items */
-    }
-
-    .nav-menu.active {
-        transform: translateX(0);
-    }
-
-    /* Every top-level item */
-    .nav-item {
-        width: 100%;
-        border-bottom: 1px solid rgba(0,0,0,0.06);
-    }
-
-    .nav-item:last-child {
-        border-bottom: none;
-    }
-
-    /* Normal links — centred */
-    .nav-link {
-        text-align: center;
-        padding: 1.1rem 1.5rem;
-        font-size: 1.05rem;
-        width: 100%;
-        display: block;
-    }
-
-    /* Services toggle row — centred, no page jump */
-    .dropdown-toggle {
-        justify-content: center;
-        padding: 1.1rem 1.5rem;
-        font-size: 1.05rem;
-        width: 100%;
-        text-align: center;
-        color: var(--text-dark);
-        font-weight: 500;
-    }
-
-    .dropdown-toggle:hover {
-        color: var(--primary-color);
-    }
-
-    /* Arrow rotation when open */
-    .dropdown.open .dropdown-toggle {
-        color: var(--primary-color);
-    }
-
-    /* Mobile dropdown — accordion style */
-    .dropdown-menu {
-        position: static;
-        opacity: 1;
-        visibility: visible;
-        transform: none;
-        box-shadow: none;
-        border-radius: 0;
-        min-width: unset;
-        background: #fafafa;
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.4s ease;
-    }
-
-    .dropdown.open .dropdown-menu {
-        max-height: 600px;   /* tall enough for all items */
-    }
-
-    /* Each service link — centred */
-    .dropdown-item a {
-        text-align: center;
-        padding: 0.85rem 1.5rem;
-        font-size: 0.97rem;
-        color: var(--text-dark);
-        justify-content: center;
-    }
-
-    .dropdown-item a:hover {
-        padding-left: 1.5rem;   /* cancel the left-shift on mobile */
-        background: rgba(255,107,157,0.07);
-        color: var(--primary-color);
-    }
-
-    .dropdown-item {
-        border-bottom: 1px solid rgba(0,0,0,0.04);
-    }
-
-    /* Remove underline pseudo on mobile */
-    .nav-link::after,
-    .dropdown-toggle::after {
-        display: none;
-    }
-}
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            background: linear-gradient(135deg, rgba(255, 107, 157, 0.9), rgba(78, 205, 196, 0.9)),
-                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23FFE66D" width="1200" height="600"/><circle fill="%23FF6B9D" opacity="0.1" cx="200" cy="150" r="180"/><circle fill="%234ECDC4" opacity="0.1" cx="900" cy="400" r="200"/><circle fill="%23FF6B9D" opacity="0.1" cx="600" cy="300" r="150"/></svg>');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+        .nav-logo {
             display: flex;
             align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: var(--white);
+            gap: .8rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: transform .3s ease;
             position: relative;
-            padding: 20px;
-            margin-top: 80px;
+            z-index: 10;
         }
 
-        .hero-content {
-            max-width: 800px;
-            animation: fadeInUp 1s ease;
+        .nav-logo:hover { transform: scale(1.05); }
+
+        .nav-logo img {
+            height: 50px;
+            width: auto;
+            transition: transform .5s ease;
+        }
+
+        .nav-logo:hover img { transform: rotate(360deg); }
+
+        /* Desktop menu */
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .nav-item { position: relative; }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 1rem;
+            transition: all .3s ease;
+            padding: .5rem 0;
+            display: block;
+            position: relative;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .nav-link:hover { color: var(--primary-color); transform: translateY(-2px); }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px; left: 0;
+            width: 0; height: 2px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            transition: width .3s ease;
+        }
+
+        .nav-link:hover::after { width: 100%; }
+
+        .dropdown-toggle {
+            display: flex;
+            align-items: center;
+            gap: .4rem;
+            user-select: none;
+        }
+
+        /* Arrow icon for dropdown */
+        .arrow-icon {
+            display: inline-block;
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 6px solid var(--text-dark);
+            transition: transform .3s ease, border-top-color .3s ease;
+            flex-shrink: 0;
+            margin-left: 2px;
+        }
+
+        .nav-link:hover .arrow-icon {
+            border-top-color: var(--primary-color);
+        }
+
+        /* Arrow rotates when dropdown open on desktop */
+        @media (min-width: 969px) {
+            .dropdown:hover .arrow-icon {
+                transform: rotate(180deg);
+                border-top-color: var(--primary-color);
+            }
+        }
+
+        /* Arrow rotates when open on mobile */
+        .dropdown.open .arrow-icon {
+            transform: rotate(180deg);
+            border-top-color: var(--primary-color);
+        }
+
+        /* Desktop dropdown */
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 12px); left: 0;
+            background: rgba(255,255,255,0.98);
+            backdrop-filter: blur(20px);
+            min-width: 280px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            border-radius: 12px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all .3s cubic-bezier(.175,.885,.32,1.275);
+            overflow: hidden;
+            z-index: 2000;
+        }
+
+        @media (min-width: 969px) {
+            .dropdown:hover .dropdown-menu {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+            }
+        }
+
+        .dropdown-item { border-bottom: 1px solid rgba(0,0,0,.05); }
+        .dropdown-item:last-child { border-bottom: none; }
+
+        .dropdown-item a {
+            display: block;
+            padding: .9rem 1.5rem;
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: .95rem;
+            transition: all .25s ease;
+        }
+
+        .dropdown-item a:hover {
+            background: linear-gradient(135deg,rgba(255,107,157,.08),rgba(78,205,196,.08));
+            color: var(--primary-color);
+            padding-left: 2rem;
+        }
+
+        /* Mobile toggle */
+        .mobile-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 8px;
+            z-index: 1100;
+            background: none;
+            border: none;
+        }
+
+        .mobile-toggle span {
+            width: 25px; height: 3px;
+            background: var(--primary-color);
+            border-radius: 3px;
+            transition: all .3s ease;
+            display: block;
+        }
+
+        .mobile-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(6px,6px); }
+        .mobile-toggle.active span:nth-child(2) { opacity:0; transform: translateX(-10px); }
+        .mobile-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(6px,-6px); }
+
+        /* ══ MOBILE NAV ══ */
+        @media (max-width: 968px) {
+            .mobile-toggle { display: flex; }
+
+            .nav-menu {
+                position: fixed;
+                top: 80px; left: 0; right: 0; bottom: 0;
+                flex-direction: column;
+                background: rgba(255,255,255,0.98);
+                backdrop-filter: blur(20px);
+                padding: 1.5rem 0 6rem;
+                gap: 0;
+                overflow-y: auto;
+                transform: translateX(100%);
+                transition: transform .35s cubic-bezier(.4,0,.2,1);
+                box-shadow: -5px 0 30px rgba(0,0,0,.1);
+                align-items: stretch;
+            }
+
+            .nav-menu.active { transform: translateX(0); }
+
+            .nav-item {
+                width: 100%;
+                border-bottom: 1px solid rgba(0,0,0,.06);
+            }
+
+            .nav-item:last-child { border-bottom: none; }
+
+            .nav-link {
+                text-align: center;
+                padding: 1.1rem 1.5rem;
+                font-size: 1.05rem;
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .dropdown-toggle {
+                justify-content: center;
+                padding: 1.1rem 1.5rem;
+                font-size: 1.05rem;
+                width: 100%;
+                display: flex;
+                align-items: center;
+            }
+
+            .dropdown.open .dropdown-toggle { color: var(--primary-color); }
+
+            /* Mobile dropdown accordion */
+            .dropdown-menu {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                border-radius: 0;
+                min-width: unset;
+                background: #fafafa;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height .4s ease;
+            }
+
+            .dropdown.open .dropdown-menu { max-height: 600px; }
+
+            .dropdown-item a {
+                text-align: center;
+                padding: .85rem 1.5rem;
+                font-size: .97rem;
+                display: block;
+            }
+
+            .dropdown-item a:hover { padding-left: 1.5rem; }
+
+            /* Hide underline on mobile */
+            .nav-link::after { display: none; }
+        }
+
+        /* ══════════════════════════════════════
+           HERO — Slider is the first thing
+        ══════════════════════════════════════ */
+        .hero {
+            min-height: 100vh;
+            background:
+                linear-gradient(135deg, rgba(255,107,157,0.72), rgba(78,205,196,0.72)),
+                url('https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=1600') center/cover;
+            background-attachment: fixed;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 40px 20px;
+            margin-top: 80px;
+            overflow: hidden;
+        }
+
+        /* ── Awareness badge ── */
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: .6rem;
+            background: rgba(255,255,255,0.25);
+            color: white;
+            padding: .6rem 1.8rem;
+            border-radius: 50px;
+            font-size: .95rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            letter-spacing: .04em;
+            border: 2px solid rgba(255,255,255,0.5);
+            animation: fadeInDown .8s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        /* ── Slider inside hero ── */
+        .hero-slider-wrapper {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            padding: .5rem 0;
             z-index: 2;
         }
 
-        .hero-logo {
-            margin-bottom: 1.5rem;
-            animation: fadeInDown 1s ease;
+        .hero-slider-wrapper::before,
+        .hero-slider-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 0; bottom: 0;
+            width: 80px;
+            z-index: 3;
+            pointer-events: none;
         }
 
-        .hero-logo img {
-            max-width: 180px;
-            height: auto;
-            filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.3));
-            transition: all 0.4s ease;
+        .hero-slider-wrapper::before {
+            left: 0;
+            background: linear-gradient(to right, rgba(255,107,157,0.5), transparent);
         }
 
-        .hero-logo img:hover {
-            transform: scale(1.1) rotate(2deg);
-            filter: drop-shadow(0 8px 25px rgba(0, 0, 0, 0.4));
+        .hero-slider-wrapper::after {
+            right: 0;
+            background: linear-gradient(to left, rgba(255,107,157,0.5), transparent);
         }
 
-        .hero h1 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-            animation: fadeInDown 1.2s ease;
-            color: #333333;
+        .hero-slider-track {
+            display: flex;
+            gap: 2rem;
+            width: max-content;
+            animation: slideLeft 40s linear infinite;
         }
 
-        .hero .tagline {
-            font-size: 1.5rem;
-            font-weight: 300;
-            margin-bottom: 2.5rem;
-            opacity: 0.95;
-            animation: fadeInUp 1.4s ease;
-            color: #333333;
+        .hero-slider-track:hover { animation-play-state: paused; }
+
+        @keyframes slideLeft {
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
         }
 
-        .hero-buttons {
+        /* ── Each slide card ── */
+        .hero-slide {
+            flex-shrink: 0;
+            width: 460px;
+            height: 340px;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            overflow: hidden;
+            border: 2px solid rgba(255,255,255,0.3);
+            display: flex;
+            cursor: pointer;
+            transition: all .5s cubic-bezier(.175,.885,.32,1.275);
+        }
+
+        .hero-slide:hover {
+            transform: translateY(-10px) scale(1.03);
+            background: rgba(255,255,255,0.25);
+            border-color: rgba(255,255,255,0.7);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+        }
+
+        /* Image half */
+        .hero-slide-img {
+            width: 45%;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .hero-slide-img::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.15);
+            transition: opacity .3s ease;
+        }
+
+        .hero-slide:hover .hero-slide-img::after { opacity: 0; }
+
+        /* Text half */
+        .hero-slide-content {
+            flex: 1;
+            padding: 1.8rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            color: white;
+        }
+
+        .hero-slide-icon {
+            font-size: 2.2rem;
+            margin-bottom: .7rem;
+            display: block;
+            transition: transform .4s ease;
+        }
+
+        .hero-slide:hover .hero-slide-icon { transform: scale(1.2) rotate(15deg); }
+
+        .hero-slide-quote {
+            font-size: .95rem;
+            font-weight: 600;
+            line-height: 1.7;
+            margin-bottom: .6rem;
+            font-style: italic;
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+
+        .hero-slide-quote strong { color: var(--accent-color); }
+
+        .hero-slide-desc {
+            font-size: .78rem;
+            color: rgba(255,255,255,0.85);
+            line-height: 1.6;
+        }
+
+        /* Coloured top border per slide */
+        .hslide-1 { border-top: 4px solid #FF6B9D; }
+        .hslide-2 { border-top: 4px solid #FFE66D; }
+        .hslide-3 { border-top: 4px solid #4ECDC4; }
+        .hslide-4 { border-top: 4px solid #A29BFE; }
+
+        /* ── Hero CTA buttons below slider ── */
+        .hero-cta {
             display: flex;
             gap: 1.5rem;
             justify-content: center;
-            margin-bottom: 2rem;
             flex-wrap: wrap;
-            animation: fadeInUp 1.6s ease;
+            margin-top: 2.5rem;
+            z-index: 2;
+            animation: fadeInUp 1s ease;
         }
 
+        /* Buttons */
         .btn {
             padding: 1rem 2.5rem;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             font-weight: 600;
             border-radius: 50px;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            gap: .5rem;
+            transition: all .4s cubic-bezier(.175,.885,.32,1.275);
             cursor: pointer;
             border: none;
             position: relative;
             overflow: hidden;
+            z-index: 1;
+            font-family: 'Poppins', sans-serif;
         }
 
         .btn::before {
             content: '';
             position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
+            top:50%; left:50%;
+            width:0; height:0;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
+            background: rgba(255,255,255,.3);
+            transform: translate(-50%,-50%);
+            transition: width .6s, height .6s;
         }
 
-        .btn:hover::before {
-            width: 300px;
-            height: 300px;
-        }
+        .btn:hover::before { width:300px; height:300px; }
 
         .btn-whatsapp {
-            background: #25D366;
-            color: white;
-            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);
+            background: #25D366; color: white;
+            box-shadow: 0 5px 20px rgba(37,211,102,.4);
         }
 
         .btn-whatsapp:hover {
             transform: translateY(-5px) scale(1.08);
-            box-shadow: 0 12px 35px rgba(37, 211, 102, 0.7);
+            box-shadow: 0 12px 35px rgba(37,211,102,.7);
         }
 
         .btn-call {
-            background: var(--white);
-            color: var(--primary-color);
-            box-shadow: 0 5px 20px rgba(255, 255, 255, 0.4);
+            background: var(--white); color: var(--primary-color);
+            box-shadow: 0 5px 20px rgba(255,255,255,.4);
         }
 
         .btn-call:hover {
             transform: translateY(-5px) scale(1.08);
-            box-shadow: 0 12px 35px rgba(255, 255, 255, 0.7);
+            box-shadow: 0 12px 35px rgba(255,255,255,.7);
         }
 
-        .trust-line {
-            font-size: 1.1rem;
-            opacity: 2.0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            animation: fadeInUp 1.8s ease;
-            color: #808080;
+        /* Mobile hero slide */
+        @media (max-width: 768px) {
+            .hero-slide {
+                width: 280px;
+                height: auto;
+                flex-direction: column;
+            }
+
+            .hero-slide-img {
+                width: 100%;
+                height: 130px;
+            }
+
+            .hero-slide-content { padding: 1rem 1.2rem; }
+            .hero-slide-quote { font-size: .85rem; }
+            .hero-slide-desc { font-size: .75rem; }
+
+            .hero-slider-wrapper::before,
+            .hero-slider-wrapper::after { width: 30px; }
+
+            .hero-cta { flex-direction: column; gap: 1rem; margin-top: 2rem; }
         }
 
         /* Container */
@@ -470,15 +596,49 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
+            position: relative;
+            z-index: 1;
         }
 
-        /* Section Styling */
-        section {
-            padding: 5rem 0;
+        /* ══════════════════════════════════════
+           SECTION BACKGROUNDS
+        ══════════════════════════════════════ */
+        section { padding: 5rem 0; position: relative; }
+
+        #services {
+            background:
+                linear-gradient(rgba(255,255,255,0.87), rgba(255,255,255,0.87)),
+                url('https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=1600') center/cover fixed;
         }
 
-        section:nth-child(even) {
-            background: var(--bg-light);
+        #why-choose-us {
+            background:
+                linear-gradient(rgba(255,248,243,0.82), rgba(255,248,243,0.82)),
+                url('https://images.unsplash.com/photo-1544776193-352d25ca82cd?w=1600') center/cover fixed;
+        }
+
+        #reviews {
+            background:
+                linear-gradient(rgba(255,255,255,0.87), rgba(255,255,255,0.87)),
+                url('https://images.unsplash.com/photo-1471286174890-9c112ffca5b4?w=1600') center/cover fixed;
+        }
+
+        #about {
+            background:
+                linear-gradient(rgba(255,248,243,0.82), rgba(255,248,243,0.82)),
+                url('https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=1600') center/cover fixed;
+        }
+
+        #locations {
+            background:
+                linear-gradient(rgba(255,255,255,0.87), rgba(255,255,255,0.87)),
+                url('https://images.unsplash.com/photo-1544776193-352d25ca82cd?w=1600') center/cover fixed;
+        }
+
+        #contact {
+            background:
+                linear-gradient(rgba(255,248,243,0.82), rgba(255,248,243,0.82)),
+                url('https://images.unsplash.com/photo-1471286174890-9c112ffca5b4?w=1600') center/cover fixed;
         }
 
         .section-title {
@@ -489,320 +649,188 @@
             margin-bottom: 3rem;
             position: relative;
             padding-bottom: 1rem;
+            text-shadow: 1px 1px 3px rgba(255,255,255,.7);
         }
 
         .section-title::after {
             content: '';
             position: absolute;
-            bottom: 0;
-            left: 50%;
+            bottom:0; left:50%;
             transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
+            width:80px; height:4px;
             background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
             border-radius: 2px;
         }
 
-        /* Services Section */
+        /* Services */
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
             gap: 2rem;
         }
 
         .service-card {
-            background: white;
+            background: rgba(255,255,255,0.96);
+            backdrop-filter: blur(15px);
             padding: 2.5rem;
             border-radius: 20px;
             text-align: center;
-            box-shadow: var(--shadow);
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+            transition: all .5s cubic-bezier(.175,.885,.32,1.275);
             cursor: pointer;
             position: relative;
             overflow: hidden;
             text-decoration: none;
             color: inherit;
             display: block;
+            border: 2px solid transparent;
         }
 
         .service-card::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 107, 157, 0.1), transparent);
-            transition: left 0.5s;
+            top:0; left:-100%;
+            width:100%; height:100%;
+            background: linear-gradient(90deg,transparent,rgba(255,107,157,.12),transparent);
+            transition: left .5s;
         }
 
-        .service-card:hover::before {
-            left: 100%;
-        }
+        .service-card:hover::before { left:100%; }
 
         .service-card:hover {
-            transform: translateY(-15px) scale(1.05) rotate(1deg);
-            box-shadow: 0 20px 50px rgba(255, 107, 157, 0.3);
-            background: linear-gradient(135deg, #ffffff 0%, #fff5f8 100%);
+            transform: translateY(-14px) scale(1.04);
+            box-shadow: 0 22px 55px rgba(255,107,157,.35);
+            border-color: var(--primary-color);
         }
 
         .service-icon {
-            font-size: 4rem;
+            font-size: 3.8rem;
             margin-bottom: 1rem;
             display: block;
-            transition: all 0.4s ease;
+            transition: all .4s ease;
         }
 
-        .service-card:hover .service-icon {
-            transform: scale(1.2) rotateY(360deg);
-        }
+        .service-card:hover .service-icon { transform: scale(1.2) rotateY(360deg); }
 
         .service-card h3 {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             color: var(--primary-color);
-            margin-bottom: 1rem;
-            transition: all 0.3s ease;
+            margin-bottom: .8rem;
+            transition: all .3s ease;
         }
 
-        .service-card:hover h3 {
-            color: var(--secondary-color);
-            transform: scale(1.05);
+        .service-card:hover h3 { color: var(--secondary-color); }
+        .service-card p { color: var(--text-light); line-height: 1.8; }
+
+        .service-card::after {
+            content: 'Click to learn more';
+            position: absolute;
+            bottom:-30px; left:50%;
+            transform: translateX(-50%);
+            background: var(--primary-color);
+            color: white;
+            padding: .4rem 1rem;
+            border-radius: 20px;
+            font-size: .82rem;
+            opacity: 0;
+            transition: all .3s ease;
+            white-space: nowrap;
         }
 
-        .service-card p {
-            color: var(--text-light);
-            line-height: 1.8;
-            transition: all 0.3s ease;
-        }
+        .service-card:hover::after { bottom:10px; opacity:1; }
 
-        .service-card:hover p {
-            color: var(--text-dark);
-        }
-
-        /* Why Choose Us */
+        /* Features */
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(240px,1fr));
             gap: 2rem;
-            margin-top: 2rem;
         }
 
         .feature-item {
             text-align: center;
             padding: 2rem;
-            background: white;
+            background: rgba(255,255,255,0.96);
+            backdrop-filter: blur(15px);
             border-radius: 15px;
-            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            transition: all .5s cubic-bezier(.68,-.55,.265,1.55);
+            border: 2px solid transparent;
+            box-shadow: 0 5px 20px rgba(0,0,0,.08);
             position: relative;
             overflow: hidden;
         }
 
-        .feature-item::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(78, 205, 196, 0.1) 0%, transparent 70%);
-            transition: all 0.6s ease;
-            opacity: 0;
-        }
-
-        .feature-item:hover::after {
-            opacity: 1;
-            transform: scale(1.5);
-        }
-
         .feature-item:hover {
             transform: translateY(-10px) scale(1.05);
-            box-shadow: 0 15px 40px rgba(78, 205, 196, 0.3);
+            box-shadow: 0 15px 40px rgba(78,205,196,.3);
+            border-color: var(--secondary-color);
         }
 
         .feature-icon {
             font-size: 3rem;
             margin-bottom: 1rem;
             display: block;
-            transition: all 0.5s ease;
+            transition: all .5s ease;
+        }
+
+        .feature-item:hover .feature-icon { transform: scale(1.3) rotateZ(360deg); }
+        .feature-item h4 { font-size: 1.15rem; margin-bottom: .5rem; color: var(--text-dark); }
+        .feature-item p  { color: var(--text-light); font-size: .92rem; }
+
+        /* Reviews */
+        .reviews-wrapper { overflow: hidden; padding: 1rem 0; }
+
+        .reviews-container {
+            display: flex;
+            gap: 2rem;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding-bottom: 1rem;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary-color) var(--bg-light);
+        }
+
+        .reviews-container::-webkit-scrollbar { height: 7px; }
+        .reviews-container::-webkit-scrollbar-track { background: var(--bg-light); border-radius: 10px; }
+        .reviews-container::-webkit-scrollbar-thumb { background: var(--primary-color); border-radius: 10px; }
+
+        .review-card {
+            background: rgba(255,255,255,0.96);
+            backdrop-filter: blur(15px);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 35px rgba(0,0,0,.12);
+            transition: all .5s cubic-bezier(.175,.885,.32,1.275);
             position: relative;
-            z-index: 1;
+            overflow: hidden;
+            min-width: 340px;
+            max-width: 340px;
+            flex-shrink: 0;
+            border: 2px solid transparent;
         }
 
-        .feature-item:hover .feature-icon {
-            transform: scale(1.3) rotateZ(360deg);
+        .review-card::before {
+            content: '❝';
+            position: absolute;
+            top:-20px; right:15px;
+            font-size: 7rem;
+            color: rgba(255,107,157,.08);
+            font-family: Georgia, serif;
+            transition: all .5s ease;
         }
 
-        .feature-item h4 {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-            color: var(--text-dark);
-            position: relative;
-            z-index: 1;
+        .review-card:hover::before { color: rgba(255,107,157,.18); transform: scale(1.2) rotate(8deg); }
+
+        .review-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 20px 55px rgba(255,107,157,.28);
+            border-color: var(--primary-color);
         }
 
-        .feature-item p {
-            color: var(--text-light);
-            font-size: 0.95rem;
-            position: relative;
-            z-index: 1;
-        }
+        .stars { color: #FFD700; font-size: 1.15rem; margin-bottom: .8rem; }
+        .review-text { font-style: italic; color: var(--text-light); margin-bottom: 1rem; line-height: 1.8; }
+        .reviewer-name { font-weight: 600; color: var(--primary-color); }
 
-      /* Replace your existing Reviews Section CSS with this */
-
-.reviews-wrapper {
-    position: relative;
-    overflow: hidden;
-    padding: 1rem 0;
-}
-
-.reviews-container {
-    display: flex;
-    gap: 2rem;
-    overflow-x: auto;
-    overflow-y: hidden;
-    scroll-behavior: smooth;
-    padding-bottom: 1rem;
-    scrollbar-width: thin;
-    scrollbar-color: var(--primary-color) var(--bg-light);
-}
-
-.reviews-container::-webkit-scrollbar {
-    height: 8px;
-}
-
-.reviews-container::-webkit-scrollbar-track {
-    background: var(--bg-light);
-    border-radius: 10px;
-}
-
-.reviews-container::-webkit-scrollbar-thumb {
-    background: var(--primary-color);
-    border-radius: 10px;
-}
-
-.reviews-container::-webkit-scrollbar-thumb:hover {
-    background: var(--secondary-color);
-}
-
-.review-card {
-    background: white;
-    padding: 2rem;
-    border-radius: 20px;
-    box-shadow: var(--shadow);
-    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    position: relative;
-    overflow: hidden;
-    min-width: 350px;
-    max-width: 350px;
-    flex-shrink: 0;
-}
-
-.review-card::before {
-    content: '❝';
-    position: absolute;
-    top: -20px;
-    right: 20px;
-    font-size: 8rem;
-    color: rgba(255, 107, 157, 0.05);
-    font-family: Georgia, serif;
-    transition: all 0.5s ease;
-}
-
-.review-card:hover::before {
-    color: rgba(255, 107, 157, 0.15);
-    transform: scale(1.2) rotate(10deg);
-}
-
-.review-card:hover {
-    transform: translateY(-12px) scale(1.03);
-    box-shadow: 0 20px 50px rgba(255, 107, 157, 0.25);
-    background: linear-gradient(135deg, #ffffff 0%, #fff9fb 100%);
-}
-
-/* Responsive Design for Reviews */
-@media (max-width: 1600px) {
-    .review-card {
-        min-width: 320px;
-        max-width: 320px;
-    }
-}
-
-@media (max-width: 1200px) {
-    .review-card {
-        min-width: 300px;
-        max-width: 300px;
-    }
-}
-
-@media (max-width: 768px) {
-    .review-card {
-        min-width: 280px;
-        max-width: 280px;
-    }
-}
-
-/* Responsive Design for Reviews */
-@media (max-width: 1200px) {
-    .review-card {
-        min-width: calc(33.333% - 1.5rem); /* Shows 3 cards */
-    }
-}
-
-@media (max-width: 968px) {
-    .review-card {
-        min-width: calc(50% - 1rem); /* Shows 2 cards */
-    }
-}
-
-@media (max-width: 768px) {
-    .review-card {
-        min-width: 280px; /* Shows 1 card on mobile */
-    }
-}
-
-/* Responsive Design for Reviews */
-@media (max-width: 1200px) {
-    .review-card {
-        min-width: calc(33.333% - 1.5rem); /* Shows 3 cards */
-    }
-}
-
-@media (max-width: 968px) {
-    .review-card {
-        min-width: calc(50% - 1rem); /* Shows 2 cards */
-    }
-}
-
-@media (max-width: 768px) {
-    .review-card {
-        min-width: 280px; /* Shows 1 card on mobile */
-    }
-}
-
-/* Responsive Design for Reviews */
-@media (max-width: 1200px) {
-    .reviews-container {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
-
-@media (max-width: 968px) {
-    .reviews-container {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 768px) {
-    .reviews-container {
-        grid-template-columns: 1fr;
-    }
-    
-    .review-card {
-        min-width: 280px;
-    }
-}
-
-        /* About Section */
+        /* About */
         .about-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -810,122 +838,64 @@
             align-items: center;
         }
 
-        .about-text h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-            color: var(--primary-color);
-        }
-
-        .about-text p {
-            color: var(--text-light);
-            margin-bottom: 1rem;
-            line-height: 1.8;
-        }
+        .about-text h3 { font-size: 1.75rem; color: var(--primary-color); margin-bottom: 1rem; }
+        .about-text p  { color: var(--text-light); margin-bottom: 1rem; line-height: 1.8; }
 
         .about-image {
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 40px rgba(0,0,0,.18);
+            transition: all .5s cubic-bezier(.175,.885,.32,1.275);
         }
 
-        .about-image:hover {
-            transform: scale(1.08) rotate(2deg);
-            box-shadow: 0 25px 60px rgba(255, 107, 157, 0.3);
-        }
-
-        .about-image img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: all 0.5s ease;
-        }
-
-        .about-image:hover img {
-            transform: scale(1.1);
-        }
+        .about-image:hover { transform: scale(1.05) rotate(2deg); box-shadow: 0 25px 60px rgba(255,107,157,.3); }
+        .about-image img { width:100%; display:block; transition: transform .5s ease; }
+        .about-image:hover img { transform: scale(1.08); }
 
         /* Locations */
         .locations-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
             gap: 2rem;
             margin-bottom: 3rem;
         }
 
         .location-card {
-            background: white;
+            background: rgba(255,255,255,0.96);
+            backdrop-filter: blur(15px);
             padding: 2rem;
             border-radius: 20px;
-            box-shadow: var(--shadow);
+            box-shadow: 0 10px 35px rgba(0,0,0,.12);
             text-align: center;
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all .5s cubic-bezier(.175,.885,.32,1.275);
+            border: 2px solid transparent;
             position: relative;
             overflow: hidden;
-        }
-
-        .location-card::before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 0;
-            background: linear-gradient(to top, rgba(78, 205, 196, 0.1), transparent);
-            transition: height 0.5s ease;
-        }
-
-        .location-card:hover::before {
-            height: 100%;
         }
 
         .location-card:hover {
             transform: translateY(-10px) scale(1.05);
-            box-shadow: 0 20px 50px rgba(78, 205, 196, 0.3);
+            box-shadow: 0 20px 55px rgba(78,205,196,.38);
+            border-color: var(--secondary-color);
         }
 
-        .location-icon {
-            font-size: 3rem;
-            color: var(--secondary-color);
-            margin-bottom: 1rem;
-            transition: all 0.5s ease;
-            position: relative;
-            z-index: 1;
-        }
-
-        .location-card:hover .location-icon {
-            transform: scale(1.3) translateY(-10px);
-            filter: drop-shadow(0 5px 15px rgba(78, 205, 196, 0.5));
-        }
-
-        .location-card h3 {
-            font-size: 1.5rem;
-            color: var(--text-dark);
-            margin-bottom: 1rem;
-            position: relative;
-            z-index: 1;
-        }
+        .location-icon { font-size: 2.8rem; color: var(--secondary-color); margin-bottom: 1rem; transition: all .5s ease; }
+        .location-card:hover .location-icon { transform: scale(1.3) translateY(-8px); }
+        .location-card h3 { font-size: 1.4rem; color: var(--text-dark); margin-bottom: 1rem; }
 
         .map-container {
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: var(--shadow);
+            box-shadow: 0 10px 40px rgba(0,0,0,.18);
             height: 400px;
-            transition: all 0.4s ease;
+            transition: all .4s ease;
+            border: 3px solid transparent;
         }
 
-        .map-container:hover {
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
-            transform: scale(1.02);
-        }
+        .map-container:hover { transform: scale(1.02); border-color: var(--secondary-color); }
+        .map-container iframe { width:100%; height:100%; border:none; }
 
-        .map-container iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        /* Contact Section */
+        /* Contact */
         .contact-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -934,27 +904,28 @@
         }
 
         .contact-form {
-            background: white;
+            background: rgba(255,255,255,0.96);
+            backdrop-filter: blur(15px);
             padding: 2.5rem;
             border-radius: 20px;
-            box-shadow: var(--shadow);
-            transition: all 0.4s ease;
+            box-shadow: 0 10px 35px rgba(0,0,0,.12);
+            border: 2px solid transparent;
+            transition: all .4s ease;
         }
 
-        .contact-form:hover {
-            box-shadow: 0 20px 50px rgba(255, 107, 157, 0.2);
-        }
+        .contact-form:hover { border-color: var(--primary-color); box-shadow: 0 20px 55px rgba(255,107,157,.25); }
 
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
+        .form-group { margin-bottom: 1.5rem; }
 
         .form-group label {
             display: block;
-            margin-bottom: 0.5rem;
+            margin-bottom: .5rem;
             font-weight: 500;
             color: var(--text-dark);
+            transition: all .3s ease;
         }
+
+        .form-group:focus-within label { color: var(--primary-color); transform: translateX(5px); }
 
         .form-group input,
         .form-group select {
@@ -964,14 +935,15 @@
             border-radius: 10px;
             font-family: 'Poppins', sans-serif;
             font-size: 1rem;
-            transition: all 0.3s ease;
+            transition: all .3s ease;
+            background: rgba(255,255,255,.9);
         }
 
         .form-group input:focus,
         .form-group select:focus {
             outline: none;
             border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(255, 107, 157, 0.1);
+            box-shadow: 0 0 0 3px rgba(255,107,157,.1);
             transform: scale(1.02);
         }
 
@@ -980,442 +952,548 @@
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
             padding: 1rem;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             font-weight: 600;
             border: none;
             border-radius: 10px;
             cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all .4s cubic-bezier(.175,.885,.32,1.275);
             position: relative;
             overflow: hidden;
+            font-family: 'Poppins', sans-serif;
         }
 
         .btn-submit::before {
             content: '';
             position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
+            top:50%; left:50%;
+            width:0; height:0;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
+            background: rgba(255,255,255,.3);
+            transform: translate(-50%,-50%);
+            transition: width .6s, height .6s;
         }
 
-        .btn-submit:hover::before {
-            width: 400px;
-            height: 400px;
-        }
-
-        .btn-submit:hover {
-            transform: translateY(-3px) scale(1.03);
-            box-shadow: 0 15px 35px rgba(255, 107, 157, 0.4);
-        }
+        .btn-submit:hover::before { width:400px; height:400px; }
+        .btn-submit:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 15px 35px rgba(255,107,157,.4); }
 
         .contact-info {
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
             padding: 2.5rem;
             border-radius: 20px;
-            box-shadow: var(--shadow);
-            transition: all 0.4s ease;
+            box-shadow: 0 10px 40px rgba(0,0,0,.18);
+            transition: all .4s ease;
         }
 
-        .contact-info:hover {
-            box-shadow: 0 20px 50px rgba(255, 107, 157, 0.4);
-            transform: translateY(-5px);
-        }
-
-        .contact-info h3 {
-            font-size: 1.8rem;
-            margin-bottom: 2rem;
-        }
+        .contact-info:hover { transform: translateY(-5px); box-shadow: 0 20px 55px rgba(255,107,157,.45); }
+        .contact-info h3 { font-size: 1.7rem; margin-bottom: 2rem; }
 
         .contact-item {
             display: flex;
             align-items: center;
             gap: 1rem;
             margin-bottom: 1.5rem;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
+            font-size: 1.05rem;
+            padding: .5rem;
+            border-radius: 10px;
+            transition: all .3s ease;
         }
 
-        .contact-item:hover {
-            transform: translateX(10px);
-        }
+        .contact-item:hover { transform: translateX(10px); background: rgba(255,255,255,.1); }
+        .contact-item-icon { font-size: 1.4rem; }
 
-        .contact-item-icon {
-            font-size: 1.5rem;
-        }
-
-        /* Floating WhatsApp Button */
+        /* WhatsApp Float */
         .whatsapp-float {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 70px;
-            height: 70px;
+            bottom:30px; right:30px;
+            width:68px; height:68px;
             background: #25D366;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.5rem;
+            font-size: 2.4rem;
             color: white;
-            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.5);
-            cursor: pointer;
-            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(37,211,102,.5);
             z-index: 1000;
-            animation: float 3s ease-in-out infinite;
+            animation: floatBtn 3s ease-in-out infinite;
             text-decoration: none;
+            transition: all .3s ease;
         }
 
-        .whatsapp-float:hover {
-            transform: scale(1.2) rotate(10deg);
-            box-shadow: 0 10px 40px rgba(37, 211, 102, 0.8);
-        }
+        .whatsapp-float:hover { transform: scale(1.2) rotate(10deg); box-shadow: 0 10px 40px rgba(37,211,102,.8); }
 
         .whatsapp-float::before {
             content: '';
             position: absolute;
-            width: 100%;
-            height: 100%;
+            width:100%; height:100%;
             border-radius: 50%;
             background: #25D366;
             animation: pulse 2s ease-in-out infinite;
             z-index: -1;
         }
 
-        /* Sticky Action Bar (Mobile) */
+        @keyframes floatBtn {
+            0%,100% { transform: translateY(0); }
+            50%      { transform: translateY(-10px); }
+        }
+
+        @keyframes pulse {
+            0%,100% { opacity:.5; transform: scale(1); }
+            50%      { opacity:0; transform: scale(1.5); }
+        }
+
+        /* Back to Top */
+        .back-to-top {
+            position: fixed;
+            bottom:110px; right:30px;
+            width:48px; height:48px;
+            background: var(--primary-color);
+            color: white;
+            border: none; border-radius: 50%;
+            font-size: 1.4rem;
+            cursor: pointer;
+            opacity:0; visibility:hidden;
+            transition: all .3s ease;
+            z-index: 999;
+            box-shadow: 0 5px 20px rgba(255,107,157,.5);
+        }
+
+        .back-to-top.visible { opacity:1; visibility:visible; }
+        .back-to-top:hover { transform: translateY(-5px) scale(1.1); box-shadow: 0 10px 28px rgba(255,107,157,.7); }
+
+        /* Sticky bar mobile */
         .sticky-actions {
             display: none;
             position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: white;
+            bottom:0; left:0; right:0;
+            background: rgba(255,255,255,0.98);
+            backdrop-filter: blur(20px);
             padding: 1rem;
-            box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 -5px 20px rgba(0,0,0,.1);
             z-index: 999;
             gap: 1rem;
         }
 
-        /* Animations */
+        /* Scroll animations */
+        .scroll-animate {
+            opacity:0; transform: translateY(50px);
+            transition: all .8s cubic-bezier(.175,.885,.32,1.275);
+        }
+        .scroll-animate.active { opacity:1; transform: translateY(0); }
+
+        .scroll-animate-left {
+            opacity:0; transform: translateX(-50px);
+            transition: all .8s cubic-bezier(.175,.885,.32,1.275);
+        }
+        .scroll-animate-left.active { opacity:1; transform: translateX(0); }
+
+        .scroll-animate-right {
+            opacity:0; transform: translateX(50px);
+            transition: all .8s cubic-bezier(.175,.885,.32,1.275);
+        }
+        .scroll-animate-right.active { opacity:1; transform: translateX(0); }
+
+        .scroll-animate-scale {
+            opacity:0; transform: scale(.85);
+            transition: all .8s cubic-bezier(.175,.885,.32,1.275);
+        }
+        .scroll-animate-scale.active { opacity:1; transform: scale(1); }
+
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity:0; transform: translateY(40px); }
+            to   { opacity:1; transform: translateY(0); }
         }
 
         @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                opacity: 0.5;
-                transform: scale(1);
-            }
-            50% {
-                opacity: 0;
-                transform: scale(1.5);
-            }
-        }
-
-        /* Scroll Animation Classes */
-        .scroll-animate {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .scroll-animate.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .scroll-animate-left {
-            opacity: 0;
-            transform: translateX(-50px);
-            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .scroll-animate-left.active {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .scroll-animate-right {
-            opacity: 0;
-            transform: translateX(50px);
-            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .scroll-animate-right.active {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .scroll-animate-scale {
-            opacity: 0;
-            transform: scale(0.8);
-            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .scroll-animate-scale.active {
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        /* Responsive Design */
-        @media (max-width: 968px) {
-            .nav-menu {
-                position: fixed;
-                left: -100%;
-                top: 80px;
-                flex-direction: column;
-                background: white;
-                width: 100%;
-                text-align: center;
-                transition: 0.3s;
-                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
-                padding: 2rem 0;
-                gap: 0;
-            }
-
-            .nav-menu.active {
-                left: 0;
-            }
-
-            .nav-item {
-                width: 100%;
-                padding: 1rem 0;
-            }
-
-            .dropdown-menu {
-                position: static;
-                opacity: 1;
-                visibility: visible;
-                transform: translateY(0);
-                box-shadow: none;
-                margin-top: 0.5rem;
-                display: none;
-            }
-
-            .dropdown.active .dropdown-menu {
-                display: block;
-            }
-
-            .mobile-toggle {
-                display: flex;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.2rem;
-            }
-
-            .hero .tagline {
-                font-size: 1.1rem;
-            }
-
-            .hero-logo img {
-                max-width: 140px;
-            }
-
-            .section-title {
-                font-size: 2rem;
-            }
-
-            .hero-buttons {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .about-content,
-            .contact-content {
-                grid-template-columns: 1fr;
-            }
-
-            .sticky-actions {
-                display: flex;
-            }
-
-            .whatsapp-float {
-                display: none;
-            }
-
-            .services-grid,
-            .features-grid,
-            .locations-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .review-card {
-                min-width: 280px;
-            }
+            from { opacity:0; transform: translateY(-40px); }
+            to   { opacity:1; transform: translateY(0); }
         }
 
         /* Footer */
         footer {
-            background: var(--text-dark);
+            background: linear-gradient(135deg, var(--text-dark), #1a252f);
             color: white;
             text-align: center;
             padding: 2rem;
+            position: relative;
         }
 
-        footer p {
-            opacity: 0.8;
+        footer::before {
+            content: '';
+            position: absolute;
+            top:0; left:0; right:0;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color), var(--accent-color));
         }
+
+        footer p { opacity: .8; }
+
+        /* Loading */
+        .loading {
+            position: fixed; inset: 0;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            display: flex; align-items: center; justify-content: center;
+            z-index: 99999;
+            transition: opacity .5s ease, visibility .5s ease;
+        }
+
+        .loading.hidden { opacity:0; visibility:hidden; }
+
+        .loading-content { text-align: center; color: white; }
+
+        .loading-logo {
+            width: 100px;
+            margin-bottom: 1.5rem;
+            animation: loadBounce 1s ease-in-out infinite;
+        }
+
+        @keyframes loadBounce {
+            0%,100% { transform: translateY(0); }
+            50%      { transform: translateY(-15px); }
+        }
+
+        .loading-spinner {
+            width:50px; height:50px;
+            border: 4px solid rgba(255,255,255,.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* ── Responsive ── */
+        @media (max-width: 768px) {
+            .section-title { font-size: 1.9rem; }
+            .about-content, .contact-content { grid-template-columns: 1fr; }
+            .sticky-actions { display: flex; }
+            .whatsapp-float, .back-to-top { display: none; }
+            .services-grid, .features-grid, .locations-grid { grid-template-columns: 1fr; }
+            .review-card { min-width: 280px; }
+            body::before { background-size: 280px; opacity: .06; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: .01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: .01ms !important;
+            }
+        }
+        /* ── Logo text block ── */
+.logo-text-wrap {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+    gap: 2px;
+}
+
+.logo-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+}
+
+.logo-tagline {
+    font-size: 0.68rem;
+    font-weight: 500;
+    color: var(--secondary-color);
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    animation: taglineFloat 3s ease-in-out infinite;
+    font-style: italic;
+}
+
+.fancy-quote {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-size: 1rem;
+    font-style: normal;
+    line-height: 1;
+    display: inline-block;
+}
+
+.open-q {
+    color: var(--primary-color);
+    animation: quoteLeft 3s ease-in-out infinite;
+    transform-origin: right center;
+}
+
+.close-q {
+    color: var(--primary-color);
+    animation: quoteRight 3s ease-in-out infinite;
+    transform-origin: left center;
+}
+
+@keyframes taglineFloat {
+    0%, 100% {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+    25% {
+        transform: translateY(-2px);
+        opacity: 0.85;
+    }
+    75% {
+        transform: translateY(2px);
+        opacity: 0.85;
+    }
+}
+
+@keyframes quoteLeft {
+    0%, 100% {
+        transform: translateX(0px) scale(1);
+        color: var(--primary-color);
+    }
+    50% {
+        transform: translateX(-3px) scale(1.2);
+        color: var(--secondary-color);
+    }
+}
+
+@keyframes quoteRight {
+    0%, 100% {
+        transform: translateX(0px) scale(1);
+        color: var(--primary-color);
+    }
+    50% {
+        transform: translateX(3px) scale(1.2);
+        color: var(--secondary-color);
+    }
+}
+
+/* Hide tagline on very small screens to avoid overflow */
+@media (max-width: 400px) {
+    .logo-tagline { display: none; }
+    .logo-title { font-size: 1rem; }
+}
+
+/* Slightly smaller on medium mobile */
+@media (max-width: 968px) {
+    .logo-title { font-size: 1.5rem; }
+    .logo-tagline { font-size: 0.6rem; letter-spacing: 0.02em; }
+}
     </style>
 </head>
 <body>
 
-    <<!-- Navigation Bar -->
-<nav class="navbar">
-    <div class="nav-container">
-        <a href="#home" class="nav-logo">
-            <img src="https://i.postimg.cc/zBjgFFby/Screenshot-2026-04-04-224646-removebg-preview.png" alt="Sree Child Guidance Centre Logo">
-            <span>SREE CHILD GUIDANCE CENTRE</span>
-        </a>
-        
-        <ul class="nav-menu">
-            <li class="nav-item">
-                <a href="#home" class="nav-link">Home</a>
-            </li>
-            <li class="nav-item dropdown">
-                <span class="nav-link dropdown-toggle" id="servicesToggle">Services ▾</span>
-                <div class="dropdown-menu" id="servicesDropdown">
-                    <div class="dropdown-item">
-                        <a href="speech-therapy.html">🗣️ Speech Therapy</a>
-                    </div>
-                    <div class="dropdown-item">
-                        <a href="occupational-therapy.html">🧠 Occupational Therapy</a>
-                    </div>
-                    <div class="dropdown-item">
-                        <a href="behavioral-therapy.html">🧩 Behavioral Therapy</a>
-                    </div>
-                    <div class="dropdown-item">
-                        <a href="physiotherapy.html">🦵 Physiotherapy</a>
-                    </div>
-                    <div class="dropdown-item">
-                        <a href="hearing-solutions.html">👂 Hearing Solutions</a>
-                    </div>
-                    <div class="dropdown-item">
-                        <a href="special-education.html">📚 Special Education</a>
-                    </div>
-                    <div class="dropdown-item">
-                        <a href="play-school.html">🎒 Play School for Special Kids</a>
-                    </div>
-                    
-                </div>
-            </li>
-            <li class="nav-item">
-                <a href="#about" class="nav-link">About</a>
-            </li>
-            <li class="nav-item">
-                <a href="#reviews" class="nav-link">Reviews</a>
-            </li>
-            <li class="nav-item">
-                <a href="#locations" class="nav-link">Locations</a>
-            </li>
-            <li class="nav-item">
-                <a href="#contact" class="nav-link">Contact</a>
-            </li>
-        </ul>
-
-        <div class="mobile-toggle" id="mobileToggle">
-            <span></span>
-            <span></span>
-            <span></span>
+    <!-- Loading Screen -->
+    <div class="loading" id="loading">
+        <div class="loading-content">
+            <img src="https://i.postimg.cc/zBjgFFby/Screenshot-2026-04-04-224646-removebg-preview.png"
+                 alt="Logo" class="loading-logo">
+            <div class="loading-spinner"></div>
         </div>
     </div>
-</nav>
 
-    <!-- Hero Section -->
+    <!-- Progress Bar -->
+    <div class="progress-bar" id="progressBar"></div>
+
+   <!-- ══ NAVBAR ══ -->
+<nav class="navbar">
+    <div class="nav-container">
+
+        <a href="#home" class="nav-logo">
+            <img src="https://i.postimg.cc/zBjgFFby/Screenshot-2026-04-04-224646-removebg-preview.png"
+                 alt="Sree Child Guidance Centre Logo">
+            <div class="logo-text-wrap">
+                <span class="logo-title">Sree Child Guidance Centre</span>
+                <span class="logo-tagline">
+                    <span class="fancy-quote open-q">❝</span>
+                    We Have Ways To Make You Communicate
+                    <span class="fancy-quote close-q">❞</span>
+                </span>
+            </div>
+        </a>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#home" class="nav-link">Home</a>
+                </li>
+
+                <!-- Services with fixed arrow -->
+                <li class="nav-item dropdown">
+                    <button class="nav-link dropdown-toggle" id="servicesToggle" type="button">
+                        Services <span class="arrow-icon"></span>
+                    </button>
+                    <div class="dropdown-menu" id="servicesDropdown">
+                        <div class="dropdown-item"><a href="speech-therapy.html">🗣️ Speech Therapy</a></div>
+                        <div class="dropdown-item"><a href="occupational-therapy.html">🧠 Occupational Therapy</a></div>
+                        <div class="dropdown-item"><a href="behavioral-therapy.html">🧩 Behavioral Therapy</a></div>
+                        <div class="dropdown-item"><a href="physiotherapy.html">🦵 Physiotherapy</a></div>
+                        <div class="dropdown-item"><a href="hearing-solutions.html">👂 Hearing Solutions</a></div>
+                        <div class="dropdown-item"><a href="special-education.html">📚 Special Education</a></div>
+                        <div class="dropdown-item"><a href="play-school.html">🎒 Play School for Special Kids</a></div>
+                    </div>
+                </li>
+
+                <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="#reviews" class="nav-link">Reviews</a></li>
+                <li class="nav-item"><a href="#locations" class="nav-link">Locations</a></li>
+                <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+
+            <button class="mobile-toggle" id="mobileToggle"
+                    aria-label="Toggle menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ══════════════════════════════════════════════
+         HERO — Autism Awareness Slider is FIRST THING
+    ══════════════════════════════════════════════ -->
     <section class="hero" id="home">
-        <div class="hero-content">
-            <div class="hero-logo">
-                <img src="https://i.postimg.cc/zBjgFFby/Screenshot-2026-04-04-224646-removebg-preview.png" alt="Sree Child Guidance Centre Logo">
-            </div>
-            <h1 class="typewriter">
-  <span id="text"></span><span class="cursor"></span>
-</h1>
 
-<style>
-.typewriter {
-  font-size: 1.5rem;
-  font-weight: normal; /* optional, since h1 is bold by default */
-}
+        <!-- Badge -->
+        <div class="hero-badge">
+            🧩 Autism Awareness &amp; Acceptance
+        </div>
 
-.cursor {
-  display: inline-block;
-  width: 3px;
-  height: 1em;
-  background-color: black;
-  margin-left: 6px;
-  animation: blink 1s infinite;
-  vertical-align: bottom;
-}
+        <!-- Slider -->
+        <div class="hero-slider-wrapper">
+            <div class="hero-slider-track">
 
-@keyframes blink {
-  0%, 50%, 100% { opacity: 1; }
-  25%, 75% { opacity: 0; }
-}
-</style>
+                <!-- Slide 1 -->
+                <div class="hero-slide hslide-1">
+                    <div class="hero-slide-img"
+                         style="background-image:url('https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=600');">
+                    </div>
+                    <div class="hero-slide-content">
+                        <span class="hero-slide-icon">🌈</span>
+                        <p class="hero-slide-quote">
+                            "Autism is not a disability,<br>
+                            it's a <strong>different ability.</strong>"
+                        </p>
+                        <p class="hero-slide-desc">Every autistic individual possesses unique strengths that enrich our world.</p>
+                    </div>
+                </div>
 
-<<script>
-const message = "❝We Have Ways to Make You Communicate..❞";
-const speed = 120; // slower (was 70)
-let i = 0;
+                <!-- Slide 2 -->
+                <div class="hero-slide hslide-2">
+                    <div class="hero-slide-img"
+                         style="background-image:url('https://images.unsplash.com/photo-1544776193-352d25ca82cd?w=600');">
+                    </div>
+                    <div class="hero-slide-content">
+                        <span class="hero-slide-icon">⭐</span>
+                        <p class="hero-slide-quote">
+                            "Why fit in when you were born to
+                            <strong>stand out?</strong>"
+                        </p>
+                        <p class="hero-slide-desc">Celebrating the uniqueness of every autistic individual.</p>
+                    </div>
+                </div>
 
-function typeWriter() {
-  if (i < message.length) {
-    document.getElementById("text").textContent += message.charAt(i);
-    i++;
-    setTimeout(typeWriter, speed);
-  }
-}
+                <!-- Slide 3 -->
+                <div class="hero-slide hslide-3">
+                    <div class="hero-slide-img"
+                         style="background-image:url('https://images.unsplash.com/photo-1471286174890-9c112ffca5b4?w=600');">
+                    </div>
+                    <div class="hero-slide-content">
+                        <span class="hero-slide-icon">❤️</span>
+                        <p class="hero-slide-quote">
+                            "The beauty of the spectrum is in its
+                            <strong>diversity.</strong>"
+                        </p>
+                        <p class="hero-slide-desc">Each variation on the spectrum is beautiful and valuable.</p>
+                    </div>
+                </div>
 
-typeWriter();
-</script>
-            
-            <div class="hero-buttons">
-                <a href="https://wa.link/1nt8d1" class="btn btn-whatsapp" target="_blank">
-                    <span>💬</span> Chat on WhatsApp
-                </a>
-                <a href="tel:+917680963882" class="btn btn-call">
-                    <span>📞</span> Call Now
-                </a>
-            </div>
+                <<!-- Slide 4 -->
+<!-- Slide 4 -->
+<div class="hero-slide hslide-4">
+    <div class="hero-slide-img"
+         style="background-image:url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600');">
+    </div>
+    <div class="hero-slide-content">
+        <span class="hero-slide-icon">🧠</span>
+        <p class="hero-slide-quote">
+            "Autistic minds are not broken,<br>
+            just <strong>uniquely wired.</strong>"
+        </p>
+        <p class="hero-slide-desc">Different thinking leads to creative solutions and remarkable perspectives.</p>
+    </div>
+</div>
 
-         
+                <!-- ── Duplicates for seamless loop ── -->
+                <div class="hero-slide hslide-1">
+                    <div class="hero-slide-img"
+                         style="background-image:url('https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=600');">
+                    </div>
+                    <div class="hero-slide-content">
+                        <span class="hero-slide-icon">🌈</span>
+                        <p class="hero-slide-quote">
+                            "Autism is not a disability,<br>
+                            it's a <strong>different ability.</strong>"
+                        </p>
+                        <p class="hero-slide-desc">Every autistic individual possesses unique strengths that enrich our world.</p>
+                    </div>
+                </div>
+
+                <div class="hero-slide hslide-2">
+                    <div class="hero-slide-img"
+                         style="background-image:url('https://images.unsplash.com/photo-1544776193-352d25ca82cd?w=600');">
+                    </div>
+                    <div class="hero-slide-content">
+                        <span class="hero-slide-icon">⭐</span>
+                        <p class="hero-slide-quote">
+                            "Why fit in when you were born to
+                            <strong>stand out?</strong>"
+                        </p>
+                        <p class="hero-slide-desc">Celebrating the uniqueness of every autistic individual.</p>
+                    </div>
+                </div>
+
+                <div class="hero-slide hslide-3">
+                    <div class="hero-slide-img"
+                         style="background-image:url('https://images.unsplash.com/photo-1471286174890-9c112ffca5b4?w=600');">
+                    </div>
+                    <div class="hero-slide-content">
+                        <span class="hero-slide-icon">❤️</span>
+                        <p class="hero-slide-quote">
+                            "The beauty of the spectrum is in its
+                            <strong>diversity.</strong>"
+                        </p>
+                        <p class="hero-slide-desc">Each variation on the spectrum is beautiful and valuable.</p>
+                    </div>
+                </div>
+
+                <div class="hero-slide hslide-4">
+                    <div class="hero-slide-img"
+                         style="background-image:url('https://images.unsplash.com/photo-1534527173375-e3b1a7bac7cb?w=600');">
+                    </div>
+                    <div class="hero-slide-content">
+                        <span class="hero-slide-icon">🧠</span>
+                        <p class="hero-slide-quote">
+                            "Autistic minds are not broken,<br>
+                            just <strong>uniquely wired.</strong>"
+                        </p>
+                        <p class="hero-slide-desc">Different thinking leads to creative solutions and remarkable perspectives.</p>
+                    </div>
+                </div>
+
+            </div><!-- /hero-slider-track -->
+        </div><!-- /hero-slider-wrapper -->
+
+        <!-- CTA Buttons -->
+        <div class="hero-cta">
+            <a href="https://wa.link/1nt8d1" class="btn btn-whatsapp" target="_blank">
+                💬 Chat on WhatsApp
+            </a>
+            <a href="tel:+917680963882" class="btn btn-call">
+                📞 Call Now
+            </a>
+        </div>
+
     </section>
 
-    <!-- Services Section -->
+    <!-- ══ SERVICES ══ -->
     <section id="services">
         <div class="container">
             <h2 class="section-title scroll-animate">Our Services</h2>
@@ -1425,47 +1503,41 @@ typeWriter();
                     <h3>Speech Therapy</h3>
                     <p>Helping children communicate clearly and confidently through personalized speech development programs.</p>
                 </a>
-
                 <a href="occupational-therapy.html" class="service-card scroll-animate">
                     <span class="service-icon">🧠</span>
                     <h3>Occupational Therapy</h3>
                     <p>Enhancing daily living skills, fine motor abilities, and sensory integration for better independence.</p>
                 </a>
-
                 <a href="behavioral-therapy.html" class="service-card scroll-animate">
                     <span class="service-icon">🧩</span>
                     <h3>Behavioral Therapy</h3>
                     <p>Supporting positive behavior development and emotional regulation in a caring environment.</p>
                 </a>
-
                 <a href="physiotherapy.html" class="service-card scroll-animate">
                     <span class="service-icon">🦵</span>
                     <h3>Physiotherapy</h3>
                     <p>Improving physical strength, coordination, and movement through specialized exercises and care.</p>
                 </a>
-
                 <a href="hearing-solutions.html" class="service-card scroll-animate">
                     <span class="service-icon">👂</span>
                     <h3>Hearing Solutions</h3>
                     <p>Comprehensive hearing assessments and interventions to support auditory development.</p>
                 </a>
                 <a href="special-education.html" class="service-card scroll-animate">
-    <span class="service-icon">📚</span>
-    <h3>Special Education</h3>
-    <p>Individualized academic support and learning programs designed to help children with special needs achieve their educational goals.</p>
-</a>
-
+                    <span class="service-icon">📚</span>
+                    <h3>Special Education</h3>
+                    <p>Individualized academic support designed to help children with special needs achieve their goals.</p>
+                </a>
                 <a href="play-school.html" class="service-card scroll-animate">
                     <span class="service-icon">🎒</span>
                     <h3>Play School for Special Kids</h3>
                     <p>A nurturing learning environment designed specifically for children with special needs.</p>
                 </a>
-                
             </div>
         </div>
     </section>
 
-    <!-- Why Choose Us Section -->
+    <!-- ══ WHY CHOOSE US ══ -->
     <section id="why-choose-us">
         <div class="container">
             <h2 class="section-title scroll-animate">Why Choose Us</h2>
@@ -1475,19 +1547,16 @@ typeWriter();
                     <h4>Experienced Therapists</h4>
                     <p>Experienced professionals specializing in child development</p>
                 </div>
-
                 <div class="feature-item scroll-animate-scale">
                     <span class="feature-icon">🏡</span>
                     <h4>Child-Friendly Environment</h4>
                     <p>Safe, welcoming spaces designed to make children feel comfortable</p>
                 </div>
-
                 <div class="feature-item scroll-animate-scale">
                     <span class="feature-icon">📋</span>
                     <h4>Personalized Plans</h4>
                     <p>Customized therapy programs tailored to each child's unique needs</p>
                 </div>
-
                 <div class="feature-item scroll-animate-scale">
                     <span class="feature-icon">📈</span>
                     <h4>Real Progress</h4>
@@ -1497,7 +1566,7 @@ typeWriter();
         </div>
     </section>
 
-    <!-- Reviews Section -->
+    <!-- ══ REVIEWS ══ -->
     <section id="reviews">
         <div class="container">
             <h2 class="section-title scroll-animate">What Parents Say</h2>
@@ -1508,43 +1577,36 @@ typeWriter();
                         <p class="review-text">"We've seen noticeable improvement in our son's speech within just a few months. The therapists are wonderful and truly care about the children."</p>
                         <p class="reviewer-name">— Priya Reddy</p>
                     </div>
-
                     <div class="review-card scroll-animate">
                         <div class="stars">⭐⭐⭐⭐⭐</div>
                         <p class="review-text">"Very caring and supportive staff. They take time to understand each child individually. Highly recommend for parents looking for quality therapy."</p>
                         <p class="reviewer-name">— Rajesh Kumar</p>
                     </div>
-
                     <div class="review-card scroll-animate">
                         <div class="stars">⭐⭐⭐⭐⭐</div>
                         <p class="review-text">"The occupational therapy sessions have helped our daughter tremendously with her motor skills. The environment is safe and child-friendly."</p>
                         <p class="reviewer-name">— Swetha Rao</p>
                     </div>
-
                     <div class="review-card scroll-animate">
                         <div class="stars">⭐⭐⭐⭐⭐</div>
                         <p class="review-text">"Excellent center with dedicated professionals. My child's confidence has grown significantly since starting therapy here. Thank you SCGC!"</p>
                         <p class="reviewer-name">— Anitha Sharma</p>
                     </div>
-
                     <div class="review-card scroll-animate">
                         <div class="stars">⭐⭐⭐⭐⭐</div>
                         <p class="review-text">"The physiotherapy program has been exceptional for my son. The therapists are patient and really know how to work with special needs children."</p>
                         <p class="reviewer-name">— Venkat Reddy</p>
                     </div>
-
                     <div class="review-card scroll-animate">
                         <div class="stars">⭐⭐⭐⭐⭐</div>
                         <p class="review-text">"Professional, caring and results-oriented. Our daughter loves coming to her sessions and we can see real progress every week."</p>
                         <p class="reviewer-name">— Lakshmi Devi</p>
                     </div>
-
                     <div class="review-card scroll-animate">
                         <div class="stars">⭐⭐⭐⭐⭐</div>
                         <p class="review-text">"The behavioral therapy has made a huge difference in our child's life. The team is compassionate and highly skilled. Grateful for their support!"</p>
                         <p class="reviewer-name">— Srinivas Rao</p>
                     </div>
-
                     <div class="review-card scroll-animate">
                         <div class="stars">⭐⭐⭐⭐⭐</div>
                         <p class="review-text">"Best decision we made for our child! The play school program is amazing and tailored perfectly for kids with special needs. Highly recommended!"</p>
@@ -1555,7 +1617,7 @@ typeWriter();
         </div>
     </section>
 
-    <!-- About Section -->
+    <!-- ══ ABOUT ══ -->
     <section id="about">
         <div class="container">
             <h2 class="section-title scroll-animate">About Us</h2>
@@ -1567,13 +1629,14 @@ typeWriter();
                     <p>With locations in Narapally, Boddupal, and Bhongir, we're here to serve families across the region with personalized care and measurable results.</p>
                 </div>
                 <div class="about-image scroll-animate-right">
-                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 400'%3E%3Crect fill='%23FFE66D' width='600' height='400'/%3E%3Ccircle fill='%23FF6B9D' opacity='0.3' cx='150' cy='200' r='80'/%3E%3Ccircle fill='%234ECDC4' opacity='0.3' cx='450' cy='200' r='100'/%3E%3Ctext x='300' y='200' font-family='Arial' font-size='24' fill='%232C3E50' text-anchor='middle'%3EHappy Children Learning%3C/text%3E%3C/svg%3E" alt="Children in therapy session">
+                    <img src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=800"
+                         alt="Happy children in learning session" loading="lazy">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Locations Section -->
+    <!-- ══ LOCATIONS ══ -->
     <section id="locations">
         <div class="container">
             <h2 class="section-title scroll-animate">Our Locations</h2>
@@ -1581,29 +1644,36 @@ typeWriter();
                 <div class="location-card scroll-animate">
                     <div class="location-icon">📍</div>
                     <h3>Narapally</h3>
-                    <a href="https://maps.app.goo.gl/M46to8a2by77eeTV6" target="_blank" class="btn" style="background: var(--secondary-color); color: white; margin-top: 1rem; display: inline-block; padding: 0.8rem 1.5rem;">Get Directions</a>
+                    <a href="https://maps.app.goo.gl/M46to8a2by77eeTV6" target="_blank" class="btn"
+                       style="background:var(--secondary-color);color:white;margin-top:1rem;padding:.8rem 1.5rem;">
+                        Get Directions
+                    </a>
                 </div>
-
                 <div class="location-card scroll-animate">
                     <div class="location-icon">📍</div>
                     <h3>Boddupal</h3>
-                    <a href="https://maps.app.goo.gl/QkKo8zf9NWgd1o3z6" target="_blank" class="btn" style="background: var(--secondary-color); color: white; margin-top: 1rem; display: inline-block; padding: 0.8rem 1.5rem;">Get Directions</a>
+                    <a href="https://maps.app.goo.gl/QkKo8zf9NWgd1o3z6" target="_blank" class="btn"
+                       style="background:var(--secondary-color);color:white;margin-top:1rem;padding:.8rem 1.5rem;">
+                        Get Directions
+                    </a>
                 </div>
-
                 <div class="location-card scroll-animate">
                     <div class="location-icon">📍</div>
                     <h3>Bhongir</h3>
-                    <a href="https://maps.app.goo.gl/i8sa4yKECczpWqhc6" target="_blank" class="btn" style="background: var(--secondary-color); color: white; margin-top: 1rem; display: inline-block; padding: 0.8rem 1.5rem;">Get Directions</a>
+                    <a href="https://maps.app.goo.gl/i8sa4yKECczpWqhc6" target="_blank" class="btn"
+                       style="background:var(--secondary-color);color:white;margin-top:1rem;padding:.8rem 1.5rem;">
+                        Get Directions
+                    </a>
                 </div>
             </div>
-
             <div class="map-container scroll-animate-scale">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3807.4862699999997!2d78.59066099999999!3d17.4087799!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb9f8df4b1ae13%3A0x4c723dfc6de0272c!2sSree%20Child%20Guidance%20Centre%20Peerzadiguda!5e0!3m2!1sen!2sin!4v1234567890123" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3807.4862699999997!2d78.59066099999999!3d17.4087799!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb9f8df4b1ae13%3A0x4c723dfc6de0272c!2sSree%20Child%20Guidance%20Centre%20Peerzadiguda!5e0!3m2!1sen!2sin!4v1234567890123"
+                        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
+    <!-- ══ CONTACT ══ -->
     <section id="contact">
         <div class="container">
             <h2 class="section-title scroll-animate">Book an Appointment</h2>
@@ -1611,51 +1681,47 @@ typeWriter();
                 <form class="contact-form scroll-animate-left" id="contactForm">
                     <div class="form-group">
                         <label for="parentName">Parent Name *</label>
-                        <input type="text" id="parentName" required>
+                        <input type="text" id="parentName" placeholder="Your name" required>
                     </div>
-
                     <div class="form-group">
                         <label for="childAge">Child Age *</label>
-                        <input type="text" id="childAge" required>
+                        <input type="text" id="childAge" placeholder="e.g. 4 years" required>
                     </div>
-
                     <div class="form-group">
                         <label for="concern">Concern *</label>
                         <select id="concern" required>
                             <option value="">Select a concern...</option>
-                            <option value="Speech Therapy">Speech Therapy</option>
-                            <option value="Occupational Therapy">Occupational Therapy</option>
-                            <option value="Behavioral Therapy">Behavioral Therapy</option>
-                            <option value="Physiotherapy">Physiotherapy</option>
-                            <option value="Hearing Solutions">Hearing Solutions</option>
+                            <option>Speech Therapy</option>
+                            <option>Occupational Therapy</option>
+                            <option>Behavioral Therapy</option>
+                            <option>Physiotherapy</option>
+                            <option>Hearing Solutions</option>
                             <option value="Play School">Play School for Special Kids</option>
                             <option value="General Inquiry">General Inquiry</option>
                         </select>
                     </div>
-
                     <div class="form-group">
                         <label for="phone">Phone Number *</label>
-                        <input type="tel" id="phone" required>
+                        <input type="tel" id="phone" placeholder="10-digit mobile number" required>
                     </div>
-
-                    <button type="submit" class="btn-submit">
-                        💬 Send on WhatsApp
-                    </button>
+                    <button type="submit" class="btn-submit">💬 Send on WhatsApp</button>
                 </form>
 
                 <div class="contact-info scroll-animate-right">
                     <h3>Get in Touch</h3>
                     <div class="contact-item">
                         <span class="contact-item-icon">📞</span>
-                        <a href="tel:+917680963882" style="color: white; text-decoration: none;">+91 7680963882 / 7396080900</a>
+                        <a href="tel:+917680963882" style="color:white;text-decoration:none;">
+                            +91 7680963882 / 7396080900
+                        </a>
                     </div>
                     <div class="contact-item">
                         <span class="contact-item-icon">💬</span>
                         <span>WhatsApp Available</span>
                     </div>
                     <div class="contact-item">
-                        <span class="contact-item-icon">🕐</span>
-                        <span>Mon - Sat: 9:30 AM - 6:00 PM</span>
+                       <span class="contact-item-icon">🕐</span>
+                        <span>Mon – Fri: 9:30 AM – 6:00 PM || Sat: 9:30 - 1:00PM </span>
                     </div>
                     <div class="contact-item">
                         <span class="contact-item-icon">📍</span>
@@ -1669,150 +1735,127 @@ typeWriter();
     <!-- Footer -->
     <footer>
         <div class="container">
-            <p>&copy; 2024 Sree Child Guidance Centre. All rights reserved. | Caring for your child's future.</p>
+            <p>&copy; 2026 Sree Child Guidance Centre. All rights reserved. | Caring for your child's future. 💖</p>
         </div>
     </footer>
 
-    <!-- Floating WhatsApp Button -->
-    <a href="https://wa.link/1nt8d1" class="whatsapp-float" target="_blank">
-        💬
-    </a>
+    <!-- Floating WhatsApp -->
+    <a href="https://wa.link/1nt8d1" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">💬</a>
 
-    <!-- Sticky Action Bar (Mobile) -->
+    <!-- Back to Top -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+    <!-- Sticky bar mobile -->
     <div class="sticky-actions">
-        <a href="https://wa.link/1nt8d1" class="btn btn-whatsapp" style="flex: 1;" target="_blank">
-            💬 WhatsApp
-        </a>
-        <a href="tel:+917680963882" class="btn btn-call" style="flex: 1;">
-            📞 Call Now
-        </a>
+        <a href="https://wa.link/1nt8d1" class="btn btn-whatsapp" style="flex:1;" target="_blank">💬 WhatsApp</a>
+        <a href="tel:+917680963882" class="btn btn-call" style="flex:1;">📞 Call Now</a>
     </div>
 
-    <!-- JavaScript -->
-  <script>
-/* ═══════════════════════════════════════════
-   NAVIGATION
-═══════════════════════════════════════════ */
-const mobileToggle  = document.getElementById('mobileToggle');
-const navMenu       = document.querySelector('.nav-menu');
-const servicesToggle = document.getElementById('servicesToggle');
-const dropdown      = servicesToggle.closest('.dropdown');
+    <script>
+    /* Loading */
+    window.addEventListener('load', () =>
+        setTimeout(() => document.getElementById('loading').classList.add('hidden'), 1200)
+    );
 
-/* --- Hamburger open / close --- */
-mobileToggle.addEventListener('click', function (e) {
-    e.stopPropagation();
-    this.classList.toggle('active');
-    navMenu.classList.toggle('active');
+    /* Progress bar */
+    window.addEventListener('scroll', () => {
+        const s = document.body.scrollTop || document.documentElement.scrollTop;
+        const h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        document.getElementById('progressBar').style.width = (s / h * 100) + '%';
+    });
 
-    /* Close dropdown if menu is closing */
-    if (!navMenu.classList.contains('active')) {
-        dropdown.classList.remove('open');
-    }
-});
+    /* ── NAVBAR ── */
+    const mobileToggle   = document.getElementById('mobileToggle');
+    const navMenu        = document.querySelector('.nav-menu');
+    const servicesToggle = document.getElementById('servicesToggle');
+    const dropdown       = servicesToggle.closest('.dropdown');
 
-/* --- Services toggle (mobile only) --- */
-servicesToggle.addEventListener('click', function (e) {
-    if (window.innerWidth <= 968) {
-        e.preventDefault();
+    /* Hamburger open/close */
+    mobileToggle.addEventListener('click', function(e) {
         e.stopPropagation();
-        dropdown.classList.toggle('open');
-    }
-});
+        const active = this.classList.toggle('active');
+        navMenu.classList.toggle('active');
+        this.setAttribute('aria-expanded', active);
+        if (!active) dropdown.classList.remove('open');
+    });
 
-/* --- Dropdown links: navigate and close menu --- */
-document.querySelectorAll('.dropdown-item a').forEach(link => {
-    link.addEventListener('click', function (e) {
-        /* Let the browser follow the href — just close the menu */
+    /* Services toggle — mobile only */
+    servicesToggle.addEventListener('click', function(e) {
+        if (window.innerWidth <= 968) {
+            e.preventDefault();
+            e.stopPropagation();
+            dropdown.classList.toggle('open');
+        }
+    });
+
+    /* Close everything */
+    const closeMenu = () => {
         mobileToggle.classList.remove('active');
         navMenu.classList.remove('active');
         dropdown.classList.remove('open');
-    });
-});
+        mobileToggle.setAttribute('aria-expanded', 'false');
+    };
 
-/* --- Other nav links close menu --- */
-document.querySelectorAll('.nav-link:not(.dropdown-toggle)').forEach(link => {
-    link.addEventListener('click', () => {
-        if (window.innerWidth <= 968) {
-            mobileToggle.classList.remove('active');
-            navMenu.classList.remove('active');
-            dropdown.classList.remove('open');
+    document.querySelectorAll('.dropdown-item a').forEach(l => l.addEventListener('click', closeMenu));
+    document.querySelectorAll('.nav-link:not(.dropdown-toggle)').forEach(l =>
+        l.addEventListener('click', () => { if (window.innerWidth <= 968) closeMenu(); })
+    );
+    document.addEventListener('click', e => {
+        if (window.innerWidth <= 968 &&
+            !navMenu.contains(e.target) &&
+            !mobileToggle.contains(e.target)) closeMenu();
+    });
+
+    /* Navbar scrolled shadow */
+    window.addEventListener('scroll', () =>
+        document.querySelector('.navbar').classList.toggle('scrolled', window.scrollY > 50)
+    );
+
+    /* ── Scroll animations ── */
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('active'); });
+    }, { threshold: 0.15, rootMargin: '0px 0px -80px 0px' });
+
+    document.querySelectorAll(
+        '.scroll-animate,.scroll-animate-left,.scroll-animate-right,.scroll-animate-scale'
+    ).forEach(el => observer.observe(el));
+
+    document.querySelectorAll('.service-card').forEach((c,i) => c.style.transitionDelay = `${i*.1}s`);
+    document.querySelectorAll('.feature-item').forEach((c,i) => c.style.transitionDelay = `${i*.15}s`);
+    document.querySelectorAll('.review-card').forEach((c,i)  => c.style.transitionDelay = `${i*.1}s`);
+
+    /* ── Back to top ── */
+    const btt = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => btt.classList.toggle('visible', window.scrollY > 500));
+    btt.addEventListener('click', () => window.scrollTo({ top:0, behavior:'smooth' }));
+
+    /* ── Smooth scroll ── */
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (href === '#') return;
+            const t = document.querySelector(href);
+            if (t) { e.preventDefault(); window.scrollTo({ top: t.offsetTop - 80, behavior:'smooth' }); }
+        });
+    });
+
+    /* ── Contact → WhatsApp ── */
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const name    = document.getElementById('parentName').value.trim();
+        const age     = document.getElementById('childAge').value.trim();
+        const concern = document.getElementById('concern').value;
+        const phone   = document.getElementById('phone').value.trim();
+
+        if (!name||!age||!concern||!phone) { alert('Please fill all required fields'); return; }
+        if (!/^[6-9]\d{9}$/.test(phone.replace(/\s/g,''))) {
+            alert('Please enter a valid 10-digit mobile number'); return;
         }
+
+        const text = `Hi, I am ${name}. I am looking for ${concern} for my child (Age: ${age}). My phone number is ${phone}.`;
+        window.open(`https://wa.me/917680963882?text=${encodeURIComponent(text)}`, '_blank');
+        this.reset();
     });
-});
-
-/* --- Close menu when tapping outside --- */
-document.addEventListener('click', function (e) {
-    if (window.innerWidth <= 968) {
-        if (!navMenu.contains(e.target) && !mobileToggle.contains(e.target)) {
-            mobileToggle.classList.remove('active');
-            navMenu.classList.remove('active');
-            dropdown.classList.remove('open');
-        }
-    }
-});
-
-/* ═══════════════════════════════════════════
-   NAVBAR SCROLL EFFECT
-═══════════════════════════════════════════ */
-window.addEventListener('scroll', function () {
-    document.querySelector('.navbar')
-            .classList.toggle('scrolled', window.scrollY > 50);
-});
-
-/* ═══════════════════════════════════════════
-   SCROLL ANIMATIONS
-═══════════════════════════════════════════ */
-const observer = new IntersectionObserver(function (entries) {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('active');
-    });
-}, { threshold: 0.15, rootMargin: '0px 0px -80px 0px' });
-
-document.querySelectorAll(
-    '.scroll-animate, .scroll-animate-left, .scroll-animate-right, .scroll-animate-scale'
-).forEach(el => observer.observe(el));
-
-/* Stagger delays */
-document.querySelectorAll('.service-card').forEach((c, i) => {
-    c.style.transitionDelay = `${i * 0.1}s`;
-});
-document.querySelectorAll('.feature-item').forEach((c, i) => {
-    c.style.transitionDelay = `${i * 0.15}s`;
-});
-document.querySelectorAll('.review-card').forEach((c, i) => {
-    c.style.transitionDelay = `${i * 0.12}s`;
-});
-
-/* ═══════════════════════════════════════════
-   CONTACT FORM → WHATSAPP
-═══════════════════════════════════════════ */
-document.getElementById('contactForm').addEventListener('submit', function (e) {
-    e.preventDefault();
-
-    const parentName = document.getElementById('parentName').value;
-    const childAge   = document.getElementById('childAge').value;
-    const concern    = document.getElementById('concern').value;
-    const phone      = document.getElementById('phone').value;
-
-    const message = `Hi, I am ${parentName}. I am looking for ${concern} for my child (Age: ${childAge}). My phone number is ${phone}.`;
-    window.open(`https://wa.me/917680963882?text=${encodeURIComponent(message)}`, '_blank');
-});
-
-/* ═══════════════════════════════════════════
-   SMOOTH SCROLL (anchor links)
-═══════════════════════════════════════════ */
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        const href = this.getAttribute('href');
-        if (href === '#') return;
-        const target = document.querySelector(href);
-        if (target) {
-            e.preventDefault();
-            window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
-        }
-    });
-});
-</script>
-
+    </script>
 </body>
 </html>
